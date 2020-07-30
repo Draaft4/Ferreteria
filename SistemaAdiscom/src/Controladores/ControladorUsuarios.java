@@ -33,7 +33,10 @@ public class ControladorUsuarios implements ControladorGenerico {
         
     }
     
-    
+    public boolean buscar (Object user){
+        boolean acceso = false;
+        return acceso;
+    }
     
     
 }

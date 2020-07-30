@@ -3,13 +3,28 @@ package Modelo;
 public class Usuario {
     
     private int idUsr;
+    private String user;
+    
     private String password;
     private int nivelAcceso;
 
-    public Usuario(int idUsr, String password, int nivelAcceso) {
+    public Usuario(int idUsr, String password, int nivelAcceso, String user) {
         this.idUsr = idUsr;
         this.password = password;
         this.nivelAcceso = nivelAcceso;
+        this.user= user;
+    }
+
+    public Usuario() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public int getIdUsr() {
@@ -38,7 +53,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "idUsr=" + idUsr + ", password=" + password + ", nivelAcceso=" + nivelAcceso + '}';
+        return "Usuario{" + "idUsr=" + idUsr + ", password=" + password + ", nivelAcceso=" + nivelAcceso + "Nombre de Usuario= "+user+'}';
     }
     
 }
