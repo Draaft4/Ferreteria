@@ -2,7 +2,10 @@ package Vista;
 
 import Controladores.ControladorCategorias;
 import Controladores.ControladorCliente;
+import Controladores.ControladorFacturaCabecera;
+import Controladores.ControladorMetodoPago;
 import Controladores.ControladorProductos;
+import Controladores.ControladorTarjeta;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
     
@@ -14,6 +17,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     ControladorCliente controlCliente;
     ControladorCategorias controlCategoria;
     ControladorProductos controlProducto;
+    ControladorTarjeta controlTarjeta;
+    ControladorMetodoPago controlMetodoPago;
+    ControladorFacturaCabecera controlFacturaCabecera;
     
     public VentanaPrincipal() {
         initComponents();
@@ -27,7 +33,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         controlCliente = new ControladorCliente();
         controlCategoria= new ControladorCategorias();
         controlProducto= new ControladorProductos(controlCategoria.getCategoria());
-        controlProducto.print();
+        controlTarjeta= new ControladorTarjeta();
+        controlMetodoPago = new ControladorMetodoPago(controlTarjeta.getTarjetaCredito());
+        controlFacturaCabecera= new ControladorFacturaCabecera( controlCliente.getCliente(),controlMetodoPago.getMetodoPago());
+        controlFacturaCabecera.print();
     }
 
     @SuppressWarnings("unchecked")

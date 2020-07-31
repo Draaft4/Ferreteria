@@ -6,11 +6,13 @@ public class MetodoPago {
     private String tipoMetodo;
     private TarjetaCredito tarjeta;
 
-    public MetodoPago(int codigo, String tipoMetodo) {
+    public MetodoPago(int codigo, String tipoMetodo, TarjetaCredito tarjeta) {
         this.codigo = codigo;
         this.tipoMetodo = tipoMetodo;
+        this.tarjeta = tarjeta;
     }
-
+    
+  
     public int getCodigo() {
         return codigo;
     }
@@ -37,7 +39,7 @@ public class MetodoPago {
 
     @Override
     public String toString() {
-        return "MetodoPago{" + "codigo=" + codigo + ", tipoMetodo=" + tipoMetodo + ", tarjeta=" + tarjeta.toString() + '}';
+        return "MetodoPago{" + "codigo=" + codigo + ", tipoMetodo=" + tipoMetodo + ", tarjeta=" +tarjeta.toString() +'}';//
     }
     
 }

@@ -15,10 +15,16 @@ public class ControladorCliente implements ControladorGenerico{
         lista = base.ListClientes();
     }
     
+   
+    
     public void print(){
         for (Cliente cliente : lista) {
             System.out.println(cliente.toString());
         }
+    }
+    
+    public ArrayList<Cliente> getCliente() {
+        return lista;
     }
     
     @Override

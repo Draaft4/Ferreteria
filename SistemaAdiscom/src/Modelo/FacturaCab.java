@@ -12,9 +12,11 @@ public class FacturaCab {
     private double desc;
     private double IVA;
     private double total;
-    private ArrayList<FacturaDet> detalles;
+    private String anulado;
+    private Cliente cliente;
+    private MetodoPago metodoPago;
 
-    public FacturaCab(int id, String numero, Date fechaEmision, double subtotal, double desc, double IVA, double total) {
+    public FacturaCab(int id, String numero, Date fechaEmision, double subtotal, double desc, double IVA, double total, String anulado, Cliente cliente, MetodoPago metodoPago) {
         this.id = id;
         this.numero = numero;
         this.fechaEmision = fechaEmision;
@@ -22,8 +24,21 @@ public class FacturaCab {
         this.desc = desc;
         this.IVA = IVA;
         this.total = total;
+        this.anulado=anulado;
+        this.cliente=cliente;
+        this.metodoPago=metodoPago;
+    }
+    
+    
+
+    public String getAnulado() {
+        return anulado;
     }
 
+    public void setAnulado(String anulado) {
+        this.anulado = anulado;
+    }
+    
     public int getId() {
         return id;
     }
@@ -80,25 +95,30 @@ public class FacturaCab {
         this.total = total;
     }
 
-    public ArrayList<FacturaDet> getDetalles() {
-        return detalles;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void addDetalles(FacturaDet detalle) {
-        this.detalles.add(detalle);
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public MetodoPago getMetodoPago() {
+        return metodoPago;
+    }
+
+    public void setMetodoPago(MetodoPago metodoPago) {
+        this.metodoPago = metodoPago;
     }
 
     @Override
     public String toString() {
-        String det = "";
-        for (FacturaDet detalle : detalles) {
-            det+="\n"+detalle.toString();
-        }
-        return "FacturaCab{" + "id=" + id + ", numero=" + numero + 
-                ", fechaEmision=" + fechaEmision + ", subtotal=" + subtotal + 
-                ", desc=" + desc + ", IVA=" + IVA + ", total=" + total + 
-                ", detalles=" + detalles + '}';
+        return "FacturaCab{" + "id=" + id + ", numero=" + numero + ", fechaEmision=" + fechaEmision + ", subtotal=" + subtotal + ", desc=" + desc + ", IVA=" + IVA + ", total=" + total + ", anulado=" + anulado + ", cliente=" + cliente + ", metodoPago=" + metodoPago + '}';
     }
+
+    
+
+    
     
     
     
