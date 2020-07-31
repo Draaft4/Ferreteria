@@ -32,6 +32,8 @@ public class MetodoPagoDB {
             for (TarjetaCredito tarjeta : listTarjeta) {
                 if(tarjeta.getCodigo() == tarid){
                     tar = tarjeta;
+                } else {
+                    
                 }
             }
            MetodoPago cl =new MetodoPago(codigo, tipo, tar);
@@ -42,6 +44,8 @@ public class MetodoPagoDB {
         System.out.println(ex.getMessage());
         System.out.println("Error en listado");
     }
+    
+        
     return metodopago;
     }
     

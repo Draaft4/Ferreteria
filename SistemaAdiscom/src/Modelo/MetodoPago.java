@@ -39,6 +39,9 @@ public class MetodoPago {
 
     @Override
     public String toString() {
+        if(tarjeta==null){
+            return "MetodoPago{" + "codigo=" + codigo + ", tipoMetodo=" + tipoMetodo + ", tarjeta=" +"null"+'}';
+        }
         return "MetodoPago{" + "codigo=" + codigo + ", tipoMetodo=" + tipoMetodo + ", tarjeta=" +tarjeta.toString() +'}';//
     }
     

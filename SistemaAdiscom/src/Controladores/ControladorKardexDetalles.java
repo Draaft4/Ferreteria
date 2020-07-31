@@ -1,8 +1,29 @@
 package Controladores;
 
+import DAO.KardexDetDB;
+import Modelo.KardexCab;
+import Modelo.KardexDet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControladorKardexDetalles implements ControladorGenerico {
+        KardexDetDB base;
+    ArrayList<KardexDet> listKardexDet;
+    
+    public ControladorKardexDetalles(ArrayList<KardexCab> listKardexCab) {
+        base = new KardexDetDB(listKardexCab);
+        
+    }
+    
+    public void print (){
+        for(KardexDet kardexcab : listKardexDet){
+            System.out.println(kardexcab.toString());
+        }
+    }
+    
+    public ArrayList<KardexDet> getKardexDet() {
+        return listKardexDet;
+    }
 
     @Override
     public void create(Object obj) {

@@ -6,11 +6,12 @@ public class KardexCab {
     
     private int id;
     private int valMin;
-    private ArrayList<KardexDet> detalles;
+    private String detalles;
 
-    public KardexCab(int id, int valMin) {
+    public KardexCab(int id, int valMin, String detalles) {
         this.id = id;
         this.valMin = valMin;
+        this.detalles = detalles;
     }
 
     public int getId() {
@@ -29,22 +30,18 @@ public class KardexCab {
         this.valMin = valMin;
     }
 
-    public ArrayList<KardexDet> getDetalles() {
+    public String getDetalles() {
         return detalles;
     }
 
-    public void addDetalles(KardexDet detalle) {
-        this.detalles.add(detalle);
+    public void setDetalles(String detalles) {
+        this.detalles = detalles;
     }
 
     @Override
     public String toString() {
-        String det = "";
-        for (KardexDet detalle : detalles) {
-            det+="\n"+detalle.toString();
-        }
-        return "KardexCab{" + "id=" + id + ", valMin=" + valMin + '}'+ 
-                "\nDetalles:"+det;
+        return "KardexCab{" + "id=" + id + ", valMin=" + valMin + ", detalles=" + detalles + '}';
     }
-    
+
+  
 }

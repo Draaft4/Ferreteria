@@ -3,6 +3,9 @@ package Vista;
 import Controladores.ControladorCategorias;
 import Controladores.ControladorCliente;
 import Controladores.ControladorFacturaCabecera;
+import Controladores.ControladorFacturaDetalles;
+import Controladores.ControladorKardexCabecera;
+import Controladores.ControladorKardexDetalles;
 import Controladores.ControladorMetodoPago;
 import Controladores.ControladorProductos;
 import Controladores.ControladorTarjeta;
@@ -20,6 +23,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     ControladorTarjeta controlTarjeta;
     ControladorMetodoPago controlMetodoPago;
     ControladorFacturaCabecera controlFacturaCabecera;
+    ControladorKardexCabecera controlKardexCabecera;
+    ControladorFacturaDetalles controlFacturaDetalles;
+    ControladorKardexDetalles controlKardexDetalle;
     
     public VentanaPrincipal() {
         initComponents();
@@ -36,7 +42,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         controlTarjeta= new ControladorTarjeta();
         controlMetodoPago = new ControladorMetodoPago(controlTarjeta.getTarjetaCredito());
         controlFacturaCabecera= new ControladorFacturaCabecera( controlCliente.getCliente(),controlMetodoPago.getMetodoPago());
-        controlFacturaCabecera.print();
+        controlKardexCabecera = new ControladorKardexCabecera();
+        controlFacturaDetalles= new ControladorFacturaDetalles(controlProducto.getProducto(),controlFacturaCabecera.getFacturaCab());
+        controlKardexDetalle = new  ControladorKardexDetalles(controlKardexCabecera.getKardexCab());
+        controlMetodoPago.print();
     }
 
     @SuppressWarnings("unchecked")

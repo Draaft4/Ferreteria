@@ -17,6 +17,7 @@ public class ControladorTarjeta implements ControladorGenerico {
     
     public void print(){
         for(TarjetaCredito tarjeta: tarjeta){
+            
             System.out.println(tarjeta.toString());
         }
                 

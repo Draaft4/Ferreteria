@@ -22,6 +22,10 @@ public class ControladorProductos implements ControladorGenerico {
         }
     }
     
+     public ArrayList<Producto> getProducto() {
+        return listProducto;
+    }
+    
 
     @Override
     public void create(Object obj) {

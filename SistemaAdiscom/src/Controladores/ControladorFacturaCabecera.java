@@ -23,6 +23,10 @@ public class ControladorFacturaCabecera implements ControladorGenerico{
         }
     }
     
+     public ArrayList<FacturaCab> getFacturaCab() {
+        return listCabecera;
+    }
+    
     @Override
     public void create(Object obj) {
        

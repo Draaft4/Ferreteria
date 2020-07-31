@@ -19,7 +19,7 @@ public class ControladorMetodoPago implements ControladorGenerico {
     
     public void print (){
         for(MetodoPago metpag : listMetodoPago){
-            System.out.println(metpag.toString());
+             System.out.println(metpag.toString());
         }
     }
     
