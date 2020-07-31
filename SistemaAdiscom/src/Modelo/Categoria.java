@@ -1,12 +1,12 @@
 package Modelo;
 
-public class CategriaProducto {
+public class Categoria {
     
     private int codigo;
     private String nombreCat;
     private String desc;
 
-    public CategriaProducto(int codigo, String nombreCat, String desc) {
+    public Categoria(int codigo, String nombreCat, String desc) {
         this.codigo = codigo;
         this.nombreCat = nombreCat;
         this.desc = desc;

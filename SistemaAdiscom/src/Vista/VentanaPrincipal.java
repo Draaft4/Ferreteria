@@ -1,6 +1,8 @@
 package Vista;
 
+import Controladores.ControladorCategorias;
 import Controladores.ControladorCliente;
+import Controladores.ControladorProductos;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
     
@@ -10,6 +12,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     AdministracionClientes viewClientes;
     VentanaKardex viewKardex;
     ControladorCliente controlCliente;
+    ControladorCategorias controlCategoria;
+    ControladorProductos controlProducto;
     
     public VentanaPrincipal() {
         initComponents();
@@ -21,7 +25,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         viewClientes = new AdministracionClientes();
         viewKardex = new VentanaKardex();
         controlCliente = new ControladorCliente();
-        controlCliente.print();
+        controlCategoria= new ControladorCategorias();
+        controlProducto= new ControladorProductos(controlCategoria.getCategoria());
+        controlProducto.print();
     }
 
     @SuppressWarnings("unchecked")
