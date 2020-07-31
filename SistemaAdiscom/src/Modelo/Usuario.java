@@ -4,7 +4,6 @@ public class Usuario {
     
     private int idUsr;
     private String user;
-    
     private String password;
     private int nivelAcceso;
 
@@ -13,10 +12,6 @@ public class Usuario {
         this.password = password;
         this.nivelAcceso = nivelAcceso;
         this.user= user;
-    }
-
-    public Usuario() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String getUser() {
