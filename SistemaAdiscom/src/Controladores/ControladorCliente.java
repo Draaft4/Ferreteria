@@ -1,15 +1,25 @@
 package Controladores;
 
+import DAO.ClientesDB;
+import Modelo.Cliente;
+import java.util.ArrayList;
 import java.util.List;
-import static javafx.scene.input.DataFormat.URL;
 
 public class ControladorCliente implements ControladorGenerico{
-
     
-
-    public static final String URL = " ";
-    public static final String USERNAME = " ";
-    public static final String PASSWORD = " ";
+    ClientesDB base = new ClientesDB();
+    
+    ArrayList<Cliente> lista;
+    
+    public ControladorCliente() {
+        lista = base.ListClientes();
+    }
+    
+    public void print(){
+        for (Cliente cliente : lista) {
+            System.out.println(cliente.toString());
+        }
+    }
     
     @Override
     public void create(Object obj) {
@@ -33,17 +43,9 @@ public class ControladorCliente implements ControladorGenerico{
 
     @Override
     public List<Object> find() {
-        
-        
-        
         return null;
-        
        
     }
-    
-    
-
-    
     
     
 }
