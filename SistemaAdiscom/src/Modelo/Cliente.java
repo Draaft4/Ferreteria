@@ -4,9 +4,11 @@ public class Cliente extends Persona{
     
     private String correo;
 
-    public Cliente(int codigo, String nombre, String apellido, String telefono, String cedula, String correo) {
-        super(codigo, nombre, apellido, telefono, cedula);
+    
+    public Cliente(int codigo, String nombre, String apellido, String telefono, String cedula, String direccion,String correo) {
+        super(codigo, nombre, apellido, telefono, cedula, direccion);
         this.correo = correo;
+      
     }
 
     public String getCorreo() {
