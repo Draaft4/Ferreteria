@@ -2,6 +2,7 @@ package Controladores;
 
 import DAO.KardexCabDB;
 import Modelo.KardexCab;
+import Modelo.KardexDet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +12,8 @@ public class ControladorKardexCabecera implements ControladorGenerico {
     
     ArrayList<KardexCab> listaKardexcab;
     
-    public ControladorKardexCabecera() {
-        listaKardexcab = base.ListKardexCab();
+    public ControladorKardexCabecera(ArrayList<KardexDet> detalle) {
+        listaKardexcab = base.ListKardexCab(detalle);
     }
     
    

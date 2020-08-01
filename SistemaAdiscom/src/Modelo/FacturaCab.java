@@ -15,8 +15,9 @@ public class FacturaCab {
     private String anulado;
     private Cliente cliente;
     private MetodoPago metodoPago;
+    private ArrayList<FacturaDet> detalles;
 
-    public FacturaCab(int id, String numero, Date fechaEmision, double subtotal, double desc, double IVA, double total, String anulado, Cliente cliente, MetodoPago metodoPago) {
+    public FacturaCab(int id, String numero, Date fechaEmision, double subtotal, double desc, double IVA, double total, String anulado, Cliente cliente, MetodoPago metodoPago, ArrayList<FacturaDet> detalles) {
         this.id = id;
         this.numero = numero;
         this.fechaEmision = fechaEmision;
@@ -24,11 +25,12 @@ public class FacturaCab {
         this.desc = desc;
         this.IVA = IVA;
         this.total = total;
-        this.anulado=anulado;
-        this.cliente=cliente;
-        this.metodoPago=metodoPago;
+        this.anulado = anulado;
+        this.cliente = cliente;
+        this.metodoPago = metodoPago;
+        this.detalles = detalles;
     }
-    
+
     
 
     public String getAnulado() {
@@ -111,14 +113,26 @@ public class FacturaCab {
         this.metodoPago = metodoPago;
     }
 
-    @Override
-    public String toString() {
-        return "FacturaCab{" + "id=" + id + ", numero=" + numero + ", fechaEmision=" + fechaEmision + ", subtotal=" + subtotal + ", desc=" + desc + ", IVA=" + IVA + ", total=" + total + ", anulado=" + anulado + ", cliente=" + cliente + ", metodoPago=" + metodoPago + '}';
+    public ArrayList<FacturaDet> getDetalles() {
+        return detalles;
     }
 
-    
+    public void addDetalles(FacturaDet detalle) {
+        this.detalles.add(detalle);
+    }
 
-    
+    @Override
+    public String toString() {
+        String det="";
+        for(FacturaDet detalle:detalles){
+            det+="\n"+detalle.toString();
+        }
+        return "FacturaCab{" + "id=" + id + ", numero=" + numero + ", fechaEmision=" 
+                + fechaEmision + ", subtotal=" + subtotal + ", desc=" + 
+                desc + ", IVA=" + IVA + ", total=" + total + ", anulado=" + 
+                anulado + ", cliente=" + cliente.toString() + ", metodoPago=" + 
+                metodoPago.toString() + "\nDetalles=" + det+ '}';
+    }
     
     
     

@@ -9,9 +9,9 @@ public class FacturaDet {
     private double subtotal;
     private boolean devuelto;
     private Producto producto;
-    private FacturaCab facturaCab;
+    private int cab;
 
-    public FacturaDet(int id, int cant, double precio, double desc, double subtotal, boolean devuelto, Producto producto,  FacturaCab facturaCab) {
+    public FacturaDet(int id, int cant, double precio, double desc, double subtotal, boolean devuelto, Producto producto, int cab) {
         this.id = id;
         this.cant = cant;
         this.precio = precio;
@@ -19,26 +19,22 @@ public class FacturaDet {
         this.subtotal = subtotal;
         this.devuelto = devuelto;
         this.producto = producto;
-        this.facturaCab= facturaCab;
+        this.cab = cab;
     }
 
+    public int getCab() {
+        return cab;
+    }
+
+    public void setCab(int cab) {
+        this.cab = cab;
+    }
+
+    
+    
     public Producto getProducto() {
         return producto;
     }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
-
-    public FacturaCab getFacturaCab() {
-        return facturaCab;
-    }
-
-    public void setFacturaCab(FacturaCab facturaCab) {
-        this.facturaCab = facturaCab;
-    }
-    
-    
 
     public int getId() {
         return id;
@@ -90,11 +86,8 @@ public class FacturaDet {
 
     @Override
     public String toString() {
-        return "FacturaDet{" + "id=" + id + ", cant=" + cant + ", precio=" + precio + ", desc=" + desc + ", subtotal=" + subtotal + ", devuelto=" + devuelto + ", producto=" + producto + ", facturaCab=" + facturaCab + '}';
+        return "FacturaDet{" + "id=" + id + ", cant=" + cant + ", precio=" + precio + ", desc=" + desc + ", subtotal=" + subtotal + ", devuelto=" + devuelto + ", producto=" + producto + ", cab=" + cab + '}';
     }
 
-   
-
-    
-    
+       
 }

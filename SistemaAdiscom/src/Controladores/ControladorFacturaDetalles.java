@@ -12,8 +12,8 @@ public class ControladorFacturaDetalles implements ControladorGenerico{
     FacturaDetDB base;
     ArrayList<FacturaDet> listDetalle;
     
-    public ControladorFacturaDetalles(ArrayList<Producto> listProducto, ArrayList<FacturaCab> listFacturaCab) {
-        base = new FacturaDetDB(listFacturaCab,listProducto);
+    public ControladorFacturaDetalles(ArrayList<Producto> listProducto) {
+        base = new FacturaDetDB(listProducto);
         listDetalle = base.ListFacturaDet();
     }
     
@@ -47,5 +47,10 @@ public class ControladorFacturaDetalles implements ControladorGenerico{
     public List<Object> find() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public ArrayList<FacturaDet> getListDetalle() {
+        return listDetalle;
+    }
+    
     
 }

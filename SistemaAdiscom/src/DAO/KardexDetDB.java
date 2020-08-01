@@ -1,4 +1,3 @@
-
 package DAO;
 
 import ConexionBD.BaseDeDatos;
@@ -13,13 +12,7 @@ import java.util.Date;
 
 
 public class KardexDetDB {
-    
-     ArrayList<KardexCab> listKardexCab;
 
-    public KardexDetDB(ArrayList<KardexCab> listKardexCab) {
-        this.listKardexCab= listKardexCab;
-    }
-    
     public ArrayList<KardexDet> ListKardexDet(){
     ArrayList<KardexDet> kardexdet = new ArrayList();
     try{
@@ -28,11 +21,10 @@ public class KardexDetDB {
         Statement st = cnx.createStatement();
         ResultSet rs = st.executeQuery("SELECT * FROM fr_kardex_detalle");
         while (rs.next()){
-            KardexCab karcab = null;
             int codigo= rs.getInt("kar_det_id");
             Date karDetFecha= rs.getDate("kar_det_fecha");
-            String karDetDetalle = rs.getString("kar_det_detale");
-            double karDetValorUnit = rs.getDouble("kar_det_valor_unit");
+            String karDetDetalle = rs.getString("kar_det_detalle");
+            double karDetValorUnit = rs.getDouble("KAR_DET_ENTR_VALOR_UNIT");
             int karDetEnCantidad = rs.getInt("kar_det_entr_cantidad");
             double karDetEnValorTotal = rs.getDouble("kar_det_entr_total");
             int karDetSalCantidad = rs.getInt("kar_det_sal_cantidad");
@@ -41,18 +33,13 @@ public class KardexDetDB {
             double karDetSaldoValorTotal = rs.getDouble("kar_det_saldo_total");
 
             int kardexCabid = rs.getInt("fr_kardex_cabecera_kar_id");
-            for (KardexCab kardexCab : listKardexCab) {
-                if(kardexCab.getId() == kardexCabid){
-                    karcab = kardexCab;
-                }
-            }
-           KardexDet cl =new KardexDet(codigo, karDetFecha, karDetDetalle, karDetValorUnit, codigo, karDetValorUnit, codigo, karDetEnValorTotal, codigo, karDetValorUnit);
+           KardexDet cl =new KardexDet(codigo, karDetFecha, karDetDetalle, karDetValorUnit, codigo, karDetValorUnit, codigo, karDetEnValorTotal, codigo, karDetValorUnit,kardexCabid);
                    
          kardexdet.add(cl);
         }
     }catch (SQLException ex){
         System.out.println(ex.getMessage());
-        System.out.println("Error en listado");
+        System.out.println("Error en listado Kardex Detalle");
     }
     return kardexdet;
     }

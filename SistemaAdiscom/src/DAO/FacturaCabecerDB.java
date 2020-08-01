@@ -4,6 +4,7 @@ package DAO;
 import ConexionBD.BaseDeDatos;
 import Modelo.Cliente;
 import Modelo.FacturaCab;
+import Modelo.FacturaDet;
 import Modelo.MetodoPago;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -17,16 +18,19 @@ public class FacturaCabecerDB {
      
      ArrayList<MetodoPago> listMetodoPago;
      ArrayList<Cliente> listCliente;
+     ArrayList<FacturaDet> listDetalle;
 
-    public FacturaCabecerDB(ArrayList<MetodoPago> listMetodoPago, ArrayList<Cliente> listCliente) {
+    public FacturaCabecerDB(ArrayList<MetodoPago> listMetodoPago, ArrayList<Cliente> listCliente,ArrayList<FacturaDet> detalles) {
         this.listMetodoPago = listMetodoPago;
         this.listCliente=listCliente;
+        this.listDetalle=detalles;
     }
     
     
     
     public ArrayList<FacturaCab> ListFacturasCab(){
     ArrayList<FacturaCab> facturaCab = new ArrayList();
+    ArrayList<FacturaDet> detalles = new ArrayList();
     try{
         Connection cnx = BaseDeDatos.getConnection();
         Statement st = cnx.createStatement();
@@ -43,12 +47,12 @@ public class FacturaCabecerDB {
             double total= rs.getDouble("cab_anulado");
             String anulado= rs.getString("cab_anulado");
             int cliId= rs.getInt("fr_clientes_cli_id");
+            
             for(Cliente cliente:listCliente ){
                 if(cliente.getCodigo() == cliId){
                     cli = cliente;
                 }
-            }
-            
+            }  
             int metodo= rs.getInt("fr_metodos_pago_met_id");
             for (MetodoPago metodoPago : listMetodoPago) {
                 if(metodoPago.getCodigo() == metodo){
@@ -56,12 +60,17 @@ public class FacturaCabecerDB {
                 }
             }
             
-            FacturaCab cl= new FacturaCab( id, numero, fechaEmision,  subtotal, desc,  iva,  total, anulado, cli, met );
+            for (FacturaDet facturaDet : listDetalle) {
+                if(id==facturaDet.getCab())
+                    detalles.add(facturaDet);
+            }
+            
+            FacturaCab cl= new FacturaCab( id, numero, fechaEmision,  subtotal, desc,  iva,  total, anulado, cli, met,detalles );
            facturaCab.add(cl);
         }
     }catch (SQLException ex){
         System.out.println(ex.getMessage());
-        System.out.println("Error en listado");
+        System.out.println("Error en listado Cabecera Fact");
     }
     return facturaCab;
     }

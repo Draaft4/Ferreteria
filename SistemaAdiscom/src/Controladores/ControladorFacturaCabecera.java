@@ -3,6 +3,7 @@ package Controladores;
 import DAO.FacturaCabecerDB;
 import Modelo.Cliente;
 import Modelo.FacturaCab;
+import Modelo.FacturaDet;
 import Modelo.MetodoPago;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +13,9 @@ public class ControladorFacturaCabecera implements ControladorGenerico{
     FacturaCabecerDB base;
     ArrayList<FacturaCab> listCabecera;
     
-    public ControladorFacturaCabecera(ArrayList<Cliente> listCliente, ArrayList<MetodoPago> listMetodoPago) {
-        base = new FacturaCabecerDB(listMetodoPago,listCliente);
+    
+    public ControladorFacturaCabecera(ArrayList<Cliente> listCliente, ArrayList<MetodoPago> listMetodoPago,ArrayList<FacturaDet> listDetalle) {
+        base = new FacturaCabecerDB(listMetodoPago,listCliente,listDetalle);
         listCabecera = base.ListFacturasCab();
     }
     

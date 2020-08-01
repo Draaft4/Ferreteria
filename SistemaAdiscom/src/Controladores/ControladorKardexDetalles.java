@@ -7,22 +7,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ControladorKardexDetalles implements ControladorGenerico {
-        KardexDetDB base;
+    KardexDetDB base;
     ArrayList<KardexDet> listKardexDet;
     
-    public ControladorKardexDetalles(ArrayList<KardexCab> listKardexCab) {
-        base = new KardexDetDB(listKardexCab);
-        
+    public ControladorKardexDetalles() {
+        base = new KardexDetDB();
+        listKardexDet=base.ListKardexDet();
+    }
+
+    public ArrayList<KardexDet> getListKardexDet() {
+        return listKardexDet;
     }
     
     public void print (){
         for(KardexDet kardexcab : listKardexDet){
             System.out.println(kardexcab.toString());
         }
-    }
-    
-    public ArrayList<KardexDet> getKardexDet() {
-        return listKardexDet;
     }
 
     @Override

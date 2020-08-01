@@ -14,8 +14,9 @@ public class KardexDet {
     private double valTotlSal;
     private int cantSaldo;
     private double saldo;
+    private int cab;
 
-    public KardexDet(int id, Date fechaEdit, String detalle, double valUnit, int cantEntr, double valTotlEnt, int cantSal, double valTotlSal, int cantSaldo, double saldo) {
+    public KardexDet(int id, Date fechaEdit, String detalle, double valUnit, int cantEntr, double valTotlEnt, int cantSal, double valTotlSal, int cantSaldo, double saldo, int cab) {
         this.id = id;
         this.fechaEdit = fechaEdit;
         this.detalle = detalle;
@@ -26,7 +27,10 @@ public class KardexDet {
         this.valTotlSal = valTotlSal;
         this.cantSaldo = cantSaldo;
         this.saldo = saldo;
+        this.cab = cab;
     }
+
+    
 
     public int getId() {
         return id;
@@ -108,13 +112,17 @@ public class KardexDet {
         this.saldo = saldo;
     }
 
+    public int getCab() {
+        return cab;
+    }
+
+    public void setCab(int cab) {
+        this.cab = cab;
+    }
+
     @Override
     public String toString() {
-        return "KardexDet{" + "id=" + id + ", fechaEdit=" + fechaEdit + 
-                ", detalle=" + detalle + ", valUnit=" + valUnit + ", cantEntr=" 
-                + cantEntr + ", valTotlEnt=" + valTotlEnt + ", cantSal=" + 
-                cantSal + ", valTotlSal=" + valTotlSal + ", cantSaldo=" + 
-                cantSaldo + ", saldo=" + saldo + '}';
+        return "KardexDet{" + "id=" + id + ", fechaEdit=" + fechaEdit + ", detalle=" + detalle + ", valUnit=" + valUnit + ", cantEntr=" + cantEntr + ", valTotlEnt=" + valTotlEnt + ", cantSal=" + cantSal + ", valTotlSal=" + valTotlSal + ", cantSaldo=" + cantSaldo + ", saldo=" + saldo + ", cab=" + cab + '}';
     }
     
     
