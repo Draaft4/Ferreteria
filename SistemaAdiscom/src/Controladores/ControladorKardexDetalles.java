@@ -7,20 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ControladorKardexDetalles implements ControladorGenerico {
+
     KardexDetDB base;
     ArrayList<KardexDet> listKardexDet;
-    
+
     public ControladorKardexDetalles() {
         base = new KardexDetDB();
-        listKardexDet=base.ListKardexDet();
+        listKardexDet = base.ListKardexDet();
     }
 
     public ArrayList<KardexDet> getListKardexDet() {
         return listKardexDet;
     }
-    
-    public void print (){
-        for(KardexDet kardexcab : listKardexDet){
+
+    public void print() {
+        for (KardexDet kardexcab : listKardexDet) {
             System.out.println(kardexcab.toString());
         }
     }
@@ -49,5 +50,5 @@ public class ControladorKardexDetalles implements ControladorGenerico {
     public List<Object> find() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

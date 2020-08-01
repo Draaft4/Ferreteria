@@ -11,7 +11,7 @@ import Controladores.ControladorProductos;
 import Controladores.ControladorTarjeta;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
-    
+
     Facturacion viewFacturacion;
     infFactura viewInfFactura;
     adminProductos viewProductos;
@@ -26,9 +26,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     ControladorKardexCabecera controlKardexCabecera;
     ControladorFacturaDetalles controlFacturaDetalles;
     ControladorKardexDetalles controlKardexDetalle;
-    
+
     public VentanaPrincipal() {
-       
+
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setTitle("Sistema Adiscom");
         viewFacturacion = new Facturacion();
@@ -37,16 +37,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         viewClientes = new AdministracionClientes();
         viewKardex = new VentanaKardex();
         controlCliente = new ControladorCliente();
-        controlCategoria= new ControladorCategorias();
-        controlProducto= new ControladorProductos(controlCategoria.getCategoria());
-        controlTarjeta= new ControladorTarjeta();
-        controlMetodoPago = new ControladorMetodoPago(controlTarjeta.getTarjetaCredito());        
-        controlFacturaDetalles= new ControladorFacturaDetalles(controlProducto.getProducto());
-        controlFacturaCabecera= new ControladorFacturaCabecera( controlCliente.getCliente(),controlMetodoPago.getMetodoPago(),controlFacturaDetalles.getListDetalle());
-        controlKardexDetalle = new  ControladorKardexDetalles();
+        controlCategoria = new ControladorCategorias();
+        controlProducto = new ControladorProductos(controlCategoria.getCategoria());
+        controlTarjeta = new ControladorTarjeta();
+        controlMetodoPago = new ControladorMetodoPago(controlTarjeta.getTarjetaCredito());
+        controlFacturaDetalles = new ControladorFacturaDetalles(controlProducto.getProducto());
+        controlFacturaCabecera = new ControladorFacturaCabecera(controlCliente.getCliente(), controlMetodoPago.getMetodoPago(), controlFacturaDetalles.getListDetalle());
+        controlKardexDetalle = new ControladorKardexDetalles();
         controlKardexCabecera = new ControladorKardexCabecera(controlKardexDetalle.getListKardexDet());
-        controlKardexDetalle.print();
-         initComponents();
+        initComponents();
     }
 
     @SuppressWarnings("unchecked")

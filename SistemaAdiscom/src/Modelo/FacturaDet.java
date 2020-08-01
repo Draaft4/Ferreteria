@@ -1,7 +1,7 @@
 package Modelo;
 
 public class FacturaDet {
-    
+
     private int id;
     private int cant;
     private double precio;
@@ -30,8 +30,6 @@ public class FacturaDet {
         this.cab = cab;
     }
 
-    
-    
     public Producto getProducto() {
         return producto;
     }
@@ -89,5 +87,4 @@ public class FacturaDet {
         return "FacturaDet{" + "id=" + id + ", cant=" + cant + ", precio=" + precio + ", desc=" + desc + ", subtotal=" + subtotal + ", devuelto=" + devuelto + ", producto=" + producto + ", cab=" + cab + '}';
     }
 
-       
 }

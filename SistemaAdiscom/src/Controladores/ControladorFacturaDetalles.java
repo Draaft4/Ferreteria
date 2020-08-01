@@ -7,22 +7,22 @@ import Modelo.Producto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ControladorFacturaDetalles implements ControladorGenerico{
+public class ControladorFacturaDetalles implements ControladorGenerico {
 
     FacturaDetDB base;
     ArrayList<FacturaDet> listDetalle;
-    
+
     public ControladorFacturaDetalles(ArrayList<Producto> listProducto) {
         base = new FacturaDetDB(listProducto);
         listDetalle = base.ListFacturaDet();
     }
-    
-    public void print (){
-        for(FacturaDet detalle : listDetalle){
+
+    public void print() {
+        for (FacturaDet detalle : listDetalle) {
             System.out.println(detalle.toString());
         }
     }
-    
+
     @Override
     public void create(Object obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -51,6 +51,5 @@ public class ControladorFacturaDetalles implements ControladorGenerico{
     public ArrayList<FacturaDet> getListDetalle() {
         return listDetalle;
     }
-    
-    
+
 }

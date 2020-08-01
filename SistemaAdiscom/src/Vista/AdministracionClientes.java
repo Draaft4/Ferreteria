@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class AdministracionClientes extends javax.swing.JInternalFrame {
-    
-    ControladorCliente contraCli= new ControladorCliente();
+
+    ControladorCliente contraCli = new ControladorCliente();
     Cliente cli;
 
     public AdministracionClientes() {
@@ -247,8 +247,7 @@ public class AdministracionClientes extends javax.swing.JInternalFrame {
         cli.setCorreo(txtCorreo.getText());
         cli.setDireccion(txtDireccion.getText());
         cli.setTelefono(txtTelefono.getText());
-        
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
@@ -256,31 +255,29 @@ public class AdministracionClientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtApellidoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String busqueda= txtBusca.getText();
-      if (busqueda.equals("")){
-           JOptionPane.showMessageDialog(null, "No dejar campos vacíos");    
-      } else {
-        
-         cli= contraCli.searchCedula(busqueda);
-         
-          System.out.println(cli.toString());
-      }
-          
-       
+        String busqueda = txtBusca.getText();
+        if (busqueda.equals("")) {
+            JOptionPane.showMessageDialog(null, "No dejar campos vacíos");
+        } else {
+
+            cli = contraCli.searchCedula(busqueda);
+
+            System.out.println(cli.toString());
+        }
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
-        ArrayList<Cliente>list;
-        
-        list=contraCli.getCliente();
-          for (Cliente cliente : list) {
+
+        ArrayList<Cliente> list;
+
+        list = contraCli.getCliente();
+        for (Cliente cliente : list) {
             System.out.println(cliente.toString());
         }
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
 
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

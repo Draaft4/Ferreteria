@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class FacturaCab {
-    
+
     private int id;
     private String numero;
     private Date fechaEmision;
@@ -31,8 +31,6 @@ public class FacturaCab {
         this.detalles = detalles;
     }
 
-    
-
     public String getAnulado() {
         return anulado;
     }
@@ -40,7 +38,7 @@ public class FacturaCab {
     public void setAnulado(String anulado) {
         this.anulado = anulado;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -123,17 +121,15 @@ public class FacturaCab {
 
     @Override
     public String toString() {
-        String det="";
-        for(FacturaDet detalle:detalles){
-            det+="\n"+detalle.toString();
+        String det = "";
+        for (FacturaDet detalle : detalles) {
+            det += "\n" + detalle.toString();
         }
-        return "FacturaCab{" + "id=" + id + ", numero=" + numero + ", fechaEmision=" 
-                + fechaEmision + ", subtotal=" + subtotal + ", desc=" + 
-                desc + ", IVA=" + IVA + ", total=" + total + ", anulado=" + 
-                anulado + ", cliente=" + cliente.toString() + ", metodoPago=" + 
-                metodoPago.toString() + "\nDetalles=" + det+ '}';
+        return "FacturaCab{" + "id=" + id + ", numero=" + numero + ", fechaEmision="
+                + fechaEmision + ", subtotal=" + subtotal + ", desc="
+                + desc + ", IVA=" + IVA + ", total=" + total + ", anulado="
+                + anulado + ", cliente=" + cliente.toString() + ", metodoPago="
+                + metodoPago.toString() + "\nDetalles=" + det + '}';
     }
-    
-    
-    
+
 }

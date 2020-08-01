@@ -1,7 +1,7 @@
 package Modelo;
 
 public class Usuario {
-    
+
     private int idUsr;
     private String user;
     private String password;
@@ -11,7 +11,7 @@ public class Usuario {
         this.idUsr = idUsr;
         this.password = password;
         this.nivelAcceso = nivelAcceso;
-        this.user= user;
+        this.user = user;
     }
 
     public String getUser() {
@@ -29,7 +29,7 @@ public class Usuario {
     public void setIdUsr(int idUsr) {
         this.idUsr = idUsr;
     }
-    
+
     public String getPassword() {
         return password;
     }
@@ -48,7 +48,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "idUsr=" + idUsr + ", password=" + password + ", nivelAcceso=" + nivelAcceso + "Nombre de Usuario= "+user+'}';
+        return "Usuario{" + "idUsr=" + idUsr + ", password=" + password + ", nivelAcceso=" + nivelAcceso + "Nombre de Usuario= " + user + '}';
     }
-    
+
 }

@@ -7,10 +7,10 @@ public class Producto {
     private String desc;
     private double precio;
     private int stock;
-    private String procedencia; 
+    private String procedencia;
     private Categoria cat;
 
-    public Producto(int codigo, String nombre, String desc, double precio, int stock,String procedencia,Categoria cat) {
+    public Producto(int codigo, String nombre, String desc, double precio, int stock, String procedencia, Categoria cat) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.desc = desc;
@@ -35,7 +35,7 @@ public class Producto {
     public void setCat(Categoria cat) {
         this.cat = cat;
     }
-    
+
     public int getCodigo() {
         return codigo;
     }
@@ -79,9 +79,8 @@ public class Producto {
     @Override
     public String toString() {
         return "Producto{" + "codigo=" + codigo + ", nombre=" + nombre + ", desc="
-                + desc + ", precio=" + precio + ", stock=" + stock + 
-                ", procedencia=" + procedencia + ", cat=" + cat.toString() + '}';
+                + desc + ", precio=" + precio + ", stock=" + stock
+                + ", procedencia=" + procedencia + ", cat=" + cat.toString() + '}';
     }
 
-    
 }

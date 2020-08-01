@@ -444,7 +444,6 @@ public class viewFact extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private com.toedter.calendar.JDateChooser dcFecha;

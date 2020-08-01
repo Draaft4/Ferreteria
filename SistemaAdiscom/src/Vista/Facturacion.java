@@ -444,10 +444,9 @@ public class Facturacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtRUCActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-                //if (txtRUC.getText())
-    //}        // TODO add your handling code here:
+        //if (txtRUC.getText())
+        //}        // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

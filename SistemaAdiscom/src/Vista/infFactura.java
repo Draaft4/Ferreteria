@@ -118,7 +118,6 @@ public class infFactura extends javax.swing.JInternalFrame {
         radioNomClien.setSelected(false);
     }//GEN-LAST:event_radioNumFactFocusGained
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private com.toedter.calendar.JDateChooser dcFechaEmi;

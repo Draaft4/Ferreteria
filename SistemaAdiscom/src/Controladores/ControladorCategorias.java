@@ -5,20 +5,20 @@ import Modelo.Categoria;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ControladorCategorias implements ControladorGenerico{
-        
+public class ControladorCategorias implements ControladorGenerico {
+
     CategoriaDB base = new CategoriaDB();
-    ArrayList <Categoria> categoria;
-    
+    ArrayList<Categoria> categoria;
+
     public ControladorCategorias() {
-        categoria= base.ListCategorias();
+        categoria = base.ListCategorias();
     }
-    
-    public void print(){
-        for(Categoria categoria: categoria){
+
+    public void print() {
+        for (Categoria categoria : categoria) {
             System.out.println(categoria.toString());
         }
-                
+
     }
 
     public ArrayList<Categoria> getCategoria() {
@@ -49,5 +49,5 @@ public class ControladorCategorias implements ControladorGenerico{
     public List<Object> find() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

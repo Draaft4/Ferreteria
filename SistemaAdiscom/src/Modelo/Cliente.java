@@ -1,14 +1,13 @@
 package Modelo;
 
-public class Cliente extends Persona{
-    
+public class Cliente extends Persona {
+
     private String correo;
 
-    
-    public Cliente(int codigo, String nombre, String apellido, String telefono, String cedula, String direccion,String correo) {
+    public Cliente(int codigo, String nombre, String apellido, String telefono, String cedula, String direccion, String correo) {
         super(codigo, nombre, apellido, telefono, cedula, direccion);
         this.correo = correo;
-      
+
     }
 
     public String getCorreo() {
@@ -21,9 +20,9 @@ public class Cliente extends Persona{
 
     @Override
     public String toString() {
-        return "Cliente{" + "correo=" + correo + ",apellido=" + this.getApellido()+
-                ",nombre="+this.getNombre()+",cedula="+this.getCedula()+
-                "telefono"+this.getTelefono()+'}';
-    } 
-    
+        return "Cliente{" + "correo=" + correo + ",apellido=" + this.getApellido()
+                + ",nombre=" + this.getNombre() + ",cedula=" + this.getCedula()
+                + "telefono" + this.getTelefono() + '}';
+    }
+
 }

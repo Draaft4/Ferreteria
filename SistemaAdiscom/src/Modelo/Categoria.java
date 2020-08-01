@@ -1,7 +1,7 @@
 package Modelo;
 
 public class Categoria {
-    
+
     private int codigo;
     private String nombreCat;
     private String desc;
@@ -40,5 +40,5 @@ public class Categoria {
     public String toString() {
         return "CategriaProducto{" + "codigo=" + codigo + ", nombreCat=" + nombreCat + ", desc=" + desc + '}';
     }
-    
+
 }

@@ -8,26 +8,24 @@ import java.util.List;
 
 public class ControladorKardexCabecera implements ControladorGenerico {
 
-      KardexCabDB base = new KardexCabDB();
-    
+    KardexCabDB base = new KardexCabDB();
+
     ArrayList<KardexCab> listaKardexcab;
-    
+
     public ControladorKardexCabecera(ArrayList<KardexDet> detalle) {
         listaKardexcab = base.ListKardexCab(detalle);
     }
-    
-   
-    
-    public void print(){
+
+    public void print() {
         for (KardexCab kardexcab : listaKardexcab) {
             System.out.println(kardexcab.toString());
         }
     }
-    
+
     public ArrayList<KardexCab> getKardexCab() {
         return listaKardexcab;
     }
-    
+
     @Override
     public void create(Object obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -52,5 +50,5 @@ public class ControladorKardexCabecera implements ControladorGenerico {
     public List<Object> find() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

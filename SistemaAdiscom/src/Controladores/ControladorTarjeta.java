@@ -1,4 +1,3 @@
-
 package Controladores;
 
 import DAO.TarjetaDB;
@@ -6,23 +5,24 @@ import Modelo.TarjetaCredito;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ControladorTarjeta implements ControladorGenerico {
+
     TarjetaDB base = new TarjetaDB();
-    ArrayList <TarjetaCredito> tarjeta;
-    
+    ArrayList<TarjetaCredito> tarjeta;
+
     public ControladorTarjeta() {
-        tarjeta= base.ListTarjeta();
+        tarjeta = base.ListTarjeta();
     }
-    
-    public void print(){
-        for(TarjetaCredito tarjeta: tarjeta){
-            
+
+    public void print() {
+        for (TarjetaCredito tarjeta : tarjeta) {
+
             System.out.println(tarjeta.toString());
         }
-                
+
     }
-     public ArrayList<TarjetaCredito> getTarjetaCredito() {
+
+    public ArrayList<TarjetaCredito> getTarjetaCredito() {
         return tarjeta;
     }
 

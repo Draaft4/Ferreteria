@@ -3,7 +3,7 @@ package Modelo;
 import java.util.Date;
 
 public class KardexDet {
-    
+
     private int id;
     private Date fechaEdit;
     private String detalle;
@@ -29,8 +29,6 @@ public class KardexDet {
         this.saldo = saldo;
         this.cab = cab;
     }
-
-    
 
     public int getId() {
         return id;
@@ -124,7 +122,5 @@ public class KardexDet {
     public String toString() {
         return "KardexDet{" + "id=" + id + ", fechaEdit=" + fechaEdit + ", detalle=" + detalle + ", valUnit=" + valUnit + ", cantEntr=" + cantEntr + ", valTotlEnt=" + valTotlEnt + ", cantSal=" + cantSal + ", valTotlSal=" + valTotlSal + ", cantSaldo=" + cantSaldo + ", saldo=" + saldo + ", cab=" + cab + '}';
     }
-    
-    
-    
+
 }

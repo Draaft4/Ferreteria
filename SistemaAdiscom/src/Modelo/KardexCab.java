@@ -3,7 +3,7 @@ package Modelo;
 import java.util.ArrayList;
 
 public class KardexCab {
-    
+
     private int id;
     private int valMin;
     private String detalles;
@@ -50,11 +50,11 @@ public class KardexCab {
 
     @Override
     public String toString() {
-        String det="";
+        String det = "";
         for (KardexDet kardexDet : detall) {
-            det+="\n"+det.toString();
+            det += "\n" + det.toString();
         }
-        return "KardexCab{" + "id=" + id + ", valMin=" + valMin + ", detalle=" + detalles + "\nDetalles=" + det+ '}';
+        return "KardexCab{" + "id=" + id + ", valMin=" + valMin + ", detalle=" + detalles + "\nDetalles=" + det + '}';
     }
-  
+
 }

@@ -1,13 +1,14 @@
 package Modelo;
 
 public class Persona {
+
     private int codigo;
     private String nombre;
     private String apellido;
     private String telefono;
     private String cedula;
     private String direccion;
-    
+
     public String getDireccion() {
         return direccion;
     }
@@ -15,8 +16,7 @@ public class Persona {
     public void setDireccion(String Direccion) {
         this.direccion = direccion;
     }
-    
-    
+
     public int getCodigo() {
         return codigo;
     }
@@ -63,12 +63,12 @@ public class Persona {
         this.apellido = apellido;
         this.telefono = telefono;
         this.cedula = cedula;
-        this.direccion= direccion;
+        this.direccion = direccion;
     }
 
     @Override
     public String toString() {
-        return "Persona{" + "codigo=" + codigo + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + ", cedula=" + cedula +", Direccion"+direccion+ '}';
+        return "Persona{" + "codigo=" + codigo + ", nombre=" + nombre + ", apellido=" + apellido + ", telefono=" + telefono + ", cedula=" + cedula + ", Direccion" + direccion + '}';
     }
-    
+
 }

@@ -1,21 +1,21 @@
 package Vista;
 
 import Controladores.ControladorUsuarios;
-import Modelo.Usuario;
 import javax.swing.JOptionPane;
 
 public class LogIn extends javax.swing.JFrame {
-    
-    ControladorUsuarios cuser = new ControladorUsuarios();
-    boolean access= false;
 
+    ControladorUsuarios cuser;
+    boolean access = false;
 
     public LogIn() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Inicio de sesion - Adiscom");
+        cuser = new ControladorUsuarios();
+        cuser.print();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -98,27 +98,28 @@ public class LogIn extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//       
-//        if (usuario.getText().equals("") || txtcontrasenia.getText().equals("")){
-//           JOptionPane.showMessageDialog(null, "Ingrese todos los datos");
-//       } else {
-//           user.setUser(usuario.getText());
-//           user.setPassword(txtcontrasenia.getText());
-//           access = cuser.buscar(user);
-//       }
-//        if (access == true){
-//            
-//        } else {
-//      JOptionPane.showMessageDialog(null, "Usuario/Contraseña Incorrecta");
-//  
-//        }
-       
+        iniciar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    
+    public void iniciar(){
+                if (usuario.getText().equals("") || txtcontrasenia.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese todos los datos");
+        } else {
+            if(cuser.verificar(usuario.getText(), new String(txtcontrasenia.getPassword()))){
+                VentanaPrincipal menu = new VentanaPrincipal();
+                menu.setVisible(true);
+                this.dispose();
+            }else
+                JOptionPane.showMessageDialog(null, "Usuario/Contraseña Incorrecta");
+
+        }
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
