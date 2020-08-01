@@ -3,10 +3,12 @@ package DAO;
 import ConexionBD.BaseDeDatos;
 import Modelo.Cliente;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class ClientesDB {
 
@@ -34,4 +36,26 @@ public class ClientesDB {
         }
         return cliente;
     }
+
+    public void insert(Cliente cliente) {
+        try {
+            Connection cnx = BaseDeDatos.getConnection();
+            //permite hacer transacciones eliminar insertar
+            PreparedStatement pst = cnx.prepareStatement("INSERT INTO  "
+                    + "FR_Clientes (  cli_id ,cli_cedula_ruc ,cli_nombre,cli_apellido," +
+                    "cli_telefono,cli_correo,cli_direccion) "
+                    + "VALUES(  FR_CLIENTES_SEQ.nextval, ?, ?, ? ,?,?,?)");
+            pst.setString(1, cliente.getCedula());
+            pst.setString(2, cliente.getNombre());
+            pst.setString(3, cliente.getApellido());
+            pst.setString(4, cliente.getTelefono());
+            pst.setString(5, cliente.getCorreo());
+            pst.setString(6, cliente.getDireccion());
+            pst.executeUpdate();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
+
 }

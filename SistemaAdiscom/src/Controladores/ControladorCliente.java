@@ -14,6 +14,10 @@ public class ControladorCliente implements ControladorGenerico {
     public ControladorCliente() {
         lista = base.ListClientes();
     }
+    
+    public void actualizarInformacion(){
+        lista = base.ListClientes();
+    }
 
     public void print() {
 
@@ -21,44 +25,44 @@ public class ControladorCliente implements ControladorGenerico {
             System.out.println(cliente.toString());
         }
     }
-    
-    public  ArrayList<Cliente> buscar(String parametro, int tipo){
-         ArrayList<Cliente> busqueda = new ArrayList<Cliente>();
-         switch(tipo){
-             case 1:
-                 //Busqueda por cedula
-                 for (Cliente cliente : lista) {
-                     if(cliente.getCedula().equals(parametro)){
-                         busqueda.add(cliente);
-                     }
-                 }
-                 break;
-             case 2:
-                 //Busqueda por nombre
-                 for (Cliente cliente : lista) {
-                     if(cliente.getNombre().equalsIgnoreCase(parametro)){
-                         busqueda.add(cliente);
-                     }
-                 }
-                 break;
-             case 3:
-                 //Busqueda por apellido
-                 for (Cliente cliente : lista) {
-                     if(cliente.getApellido().equalsIgnoreCase(parametro)){
-                         busqueda.add(cliente);
-                     }
-                 }
-                 break;
-             case 4:
-                 //Busqueda por correo
-                 for (Cliente cliente : lista) {
-                     if(cliente.getCorreo().equals(parametro)){
-                         busqueda.add(cliente);
-                     }
-                 }
-                 break;
-         }
-         return busqueda;
+
+    public ArrayList<Cliente> buscar(String parametro, int tipo) {
+        ArrayList<Cliente> busqueda = new ArrayList<Cliente>();
+        switch (tipo) {
+            case 1:
+                //Busqueda por cedula
+                for (Cliente cliente : lista) {
+                    if (cliente.getCedula().equals(parametro)) {
+                        busqueda.add(cliente);
+                    }
+                }
+                break;
+            case 2:
+                //Busqueda por nombre
+                for (Cliente cliente : lista) {
+                    if (cliente.getNombre().equalsIgnoreCase(parametro)) {
+                        busqueda.add(cliente);
+                    }
+                }
+                break;
+            case 3:
+                //Busqueda por apellido
+                for (Cliente cliente : lista) {
+                    if (cliente.getApellido().equalsIgnoreCase(parametro)) {
+                        busqueda.add(cliente);
+                    }
+                }
+                break;
+            case 4:
+                //Busqueda por correo
+                for (Cliente cliente : lista) {
+                    if (cliente.getCorreo().equals(parametro)) {
+                        busqueda.add(cliente);
+                    }
+                }
+                break;
+        }
+        return busqueda;
     }
 
     public ArrayList<Cliente> getCliente() {
@@ -76,9 +80,8 @@ public class ControladorCliente implements ControladorGenerico {
 
     }
 
-    @Override
-    public void update(Object obj) {
-
+    public void insertCliente(Cliente cliente) {
+        base.insert(cliente);
     }
 
     @Override
@@ -90,6 +93,11 @@ public class ControladorCliente implements ControladorGenerico {
     public List<Object> find() {
         return null;
 
+    }
+
+    @Override
+    public void update(Object obj) {
+        
     }
 
 }

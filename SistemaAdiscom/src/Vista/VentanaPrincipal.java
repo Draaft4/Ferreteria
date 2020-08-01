@@ -33,7 +33,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setTitle("Sistema Adiscom");
-       
+
         controlCliente = new ControladorCliente();
         controlCategoria = new ControladorCategorias();
         controlProducto = new ControladorProductos(controlCategoria.getCategoria());
@@ -44,7 +44,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         controlKardexDetalle = new ControladorKardexDetalles();
         controlKardexCabecera = new ControladorKardexCabecera(controlKardexDetalle.getListKardexDet());
         this.NivelAcceso = nivelAcceso;
-         viewFacturacion = new Facturacion();
+        viewFacturacion = new Facturacion();
         viewInfFactura = new infFactura();
         viewProductos = new adminProductos();
         viewClientes = new AdministracionClientes(controlCliente);
