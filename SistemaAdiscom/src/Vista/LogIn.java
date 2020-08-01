@@ -1,6 +1,7 @@
 package Vista;
 
 import Controladores.ControladorUsuarios;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 public class LogIn extends javax.swing.JFrame {
@@ -14,6 +15,7 @@ public class LogIn extends javax.swing.JFrame {
         this.setTitle("Inicio de sesion - Adiscom");
         cuser = new ControladorUsuarios();
         cuser.print();
+        usuario.requestFocus();
     }
 
     @SuppressWarnings("unchecked")
@@ -35,6 +37,12 @@ public class LogIn extends javax.swing.JFrame {
 
         jLabel2.setText("Contraseña:");
 
+        usuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                usuarioKeyPressed(evt);
+            }
+        });
+
         jButton1.setText("Iniciar Sesion");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -43,6 +51,12 @@ public class LogIn extends javax.swing.JFrame {
         });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/img/lg_img.png"))); // NOI18N
+
+        txtcontrasenia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtcontraseniaKeyPressed(evt);
+            }
+        });
 
         jButton2.setText("Cerrar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -105,21 +119,39 @@ public class LogIn extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    
-    public void iniciar(){
-                if (usuario.getText().equals("") || txtcontrasenia.getText().equals("")) {
+    private void txtcontraseniaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcontraseniaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            iniciar();
+        }
+    }//GEN-LAST:event_txtcontraseniaKeyPressed
+
+    private void usuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usuarioKeyPressed
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            iniciar();
+        }
+    }//GEN-LAST:event_usuarioKeyPressed
+
+    public void iniciar() {
+        if (usuario.getText().equals("") || txtcontrasenia.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Ingrese todos los datos");
+            usuario.setText("");
+                txtcontrasenia.setText("");
+                usuario.requestFocus();
         } else {
-            if(cuser.verificar(usuario.getText(), new String(txtcontrasenia.getPassword()))){
+            if (cuser.verificar(usuario.getText(), new String(txtcontrasenia.getPassword()))) {
                 VentanaPrincipal menu = new VentanaPrincipal();
                 menu.setVisible(true);
                 this.dispose();
-            }else
+            } else {
                 JOptionPane.showMessageDialog(null, "Usuario/Contraseña Incorrecta");
+                usuario.setText("");
+                txtcontrasenia.setText("");
+                usuario.requestFocus();
+            }
 
         }
     }
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

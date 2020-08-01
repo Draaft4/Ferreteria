@@ -14,31 +14,31 @@ public class ControladorUsuarios implements ControladorGenerico {
         base = new UsuarioBD();
         listUsuario = base.ListUsuario();
     }
-    public void print(){
+
+    public void print() {
         for (Usuario usuario : listUsuario) {
             System.out.println(usuario.toString());
         }
     }
-           
-            
-    public boolean verificar(String usr, String pass){
+
+    public boolean verificar(String usr, String pass) {
         Usuario usrObtn = null;
         for (Usuario usuario : listUsuario) {
-            if(usuario.getUser().equals(usr))
-                usrObtn=usuario;
+            if (usuario.getUser().equals(usr)) {
+                usrObtn = usuario;
+            }
         }
-        if(usrObtn!=null){
-            if(usrObtn.getPassword().equals(pass))
+        if (usrObtn != null) {
+            if (usrObtn.getPassword().equals(pass)) {
                 return true;
-            else
+            } else {
                 return false;
-        }else{
+            }
+        } else {
             return false;
         }
     }
-    
-   
-    
+
     @Override
     public void create(Object obj) {
 
