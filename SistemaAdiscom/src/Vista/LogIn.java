@@ -125,7 +125,7 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_txtcontraseniaKeyPressed
 
     private void usuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usuarioKeyPressed
-       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             iniciar();
         }
     }//GEN-LAST:event_usuarioKeyPressed
@@ -134,8 +134,8 @@ public class LogIn extends javax.swing.JFrame {
         if (usuario.getText().equals("") || txtcontrasenia.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Ingrese todos los datos");
             usuario.setText("");
-                txtcontrasenia.setText("");
-                usuario.requestFocus();
+            txtcontrasenia.setText("");
+            usuario.requestFocus();
         } else {
             if (cuser.verificar(usuario.getText(), new String(txtcontrasenia.getPassword()))) {
                 VentanaPrincipal menu = new VentanaPrincipal(cuser.getNivelAccesoActual());

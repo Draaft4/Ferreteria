@@ -12,6 +12,7 @@ import Controladores.ControladorTarjeta;
 import javax.swing.JOptionPane;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
+
     int NivelAcceso;
     Facturacion viewFacturacion;
     infFactura viewInfFactura;
@@ -29,14 +30,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     ControladorKardexDetalles controlKardexDetalle;
 
     public VentanaPrincipal(int nivelAcceso) {
-        
+
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setTitle("Sistema Adiscom");
-        viewFacturacion = new Facturacion();
-        viewInfFactura = new infFactura();
-        viewProductos = new adminProductos();
-        viewClientes = new AdministracionClientes();
-        viewKardex = new VentanaKardex();
+       
         controlCliente = new ControladorCliente();
         controlCategoria = new ControladorCategorias();
         controlProducto = new ControladorProductos(controlCategoria.getCategoria());
@@ -46,7 +43,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         controlFacturaCabecera = new ControladorFacturaCabecera(controlCliente.getCliente(), controlMetodoPago.getMetodoPago(), controlFacturaDetalles.getListDetalle());
         controlKardexDetalle = new ControladorKardexDetalles();
         controlKardexCabecera = new ControladorKardexCabecera(controlKardexDetalle.getListKardexDet());
-        this.NivelAcceso=nivelAcceso;
+        this.NivelAcceso = nivelAcceso;
+         viewFacturacion = new Facturacion();
+        viewInfFactura = new infFactura();
+        viewProductos = new adminProductos();
+        viewClientes = new AdministracionClientes(controlCliente);
+        viewKardex = new VentanaKardex();
         initComponents();
     }
 
@@ -151,56 +153,55 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     Nivel de acceso 3 = bodega
     Nivel de acceso 4 = contabilidad
     
-    */
+     */
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        if(NivelAcceso==1 || NivelAcceso==2 || NivelAcceso==4){
-         esc.add(viewFacturacion);
-        viewFacturacion.setVisible(true);   
-        }else{
-             JOptionPane.showMessageDialog(null, "No tiene acceso a esta ventana ");
+        if (NivelAcceso == 1 || NivelAcceso == 2 || NivelAcceso == 4) {
+            esc.add(viewFacturacion);
+            viewFacturacion.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "No tiene acceso a esta ventana ");
         }
-        
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        if(NivelAcceso==1 || NivelAcceso==2 || NivelAcceso==4){
-         esc.add(viewInfFactura);
-        viewInfFactura.setVisible(true);
-        }else{
-             JOptionPane.showMessageDialog(null, "No tiene acceso a esta ventana ");
+        if (NivelAcceso == 1 || NivelAcceso == 2 || NivelAcceso == 4) {
+            esc.add(viewInfFactura);
+            viewInfFactura.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "No tiene acceso a esta ventana ");
         }
-        
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-       if(NivelAcceso==1 || NivelAcceso==3 || NivelAcceso==4){
-        esc.add(viewProductos);
-        viewProductos.setVisible(true);
-        }else{
-             JOptionPane.showMessageDialog(null, "No tiene acceso a esta ventana ");
+        if (NivelAcceso == 1 || NivelAcceso == 3 || NivelAcceso == 4) {
+            esc.add(viewProductos);
+            viewProductos.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "No tiene acceso a esta ventana ");
         }
-        
-        
+
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-       if(NivelAcceso==1 || NivelAcceso==2 || NivelAcceso==4){
-         esc.add(viewClientes);
-        viewClientes.setVisible(true);
-        }else{
-             JOptionPane.showMessageDialog(null, "No tiene acceso a esta ventana ");
+        if (NivelAcceso == 1 || NivelAcceso == 2 || NivelAcceso == 4) {
+            esc.add(viewClientes);
+            viewClientes.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "No tiene acceso a esta ventana ");
         }
-        
+
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-         if(NivelAcceso==1 || NivelAcceso==4){
-         esc.add(viewKardex);
-        viewKardex.setVisible(true);
-        }else{
-             JOptionPane.showMessageDialog(null, "No tiene acceso a esta ventana ");
+        if (NivelAcceso == 1 || NivelAcceso == 4) {
+            esc.add(viewKardex);
+            viewKardex.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "No tiene acceso a esta ventana ");
         }
-        
+
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     public static void main(String args[]) {

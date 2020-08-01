@@ -1,35 +1,94 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vista;
 
 import Controladores.ControladorCliente;
 import Modelo.Cliente;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class AdministracionClientes extends javax.swing.JInternalFrame {
 
-    ControladorCliente contraCli = new ControladorCliente();
+    ControladorCliente contraCli;
+    ArrayList<Cliente> listCliente;
     Cliente cli;
 
-    public AdministracionClientes() {
+    DefaultTableModel modelo2;
+
+    private void CrearModelo2() {
+
+        try {
+            modelo2 = (new DefaultTableModel(
+                    null, new String[]{
+                        "Codigo", "Nombre",
+                        "Apellido", "Cedula", "Telefono", "Direccion", "Correo"}) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false, false
+                };
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            tabla2.setModel(modelo2);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString() + "error2");
+        }
+    }
+
+    public void actualizarTabla(ArrayList<Cliente> listCliente) {
+        // "Codigo", "Nombre", "Apellido", "Cedula", "Telefono", "Direccion", "Correo"
+        Object O[] = null;
+        for (int i = 0; i < listCliente.size(); i++) {
+            modelo2.addRow(O);
+            Cliente getC = (Cliente) listCliente.get(i);
+            modelo2.setValueAt(getC.getCodigo(), i, 0);
+            modelo2.setValueAt(getC.getNombre(), i, 1);
+            modelo2.setValueAt(getC.getApellido(), i, 2);
+            modelo2.setValueAt(getC.getCedula(), i, 3);
+            modelo2.setValueAt(getC.getTelefono(), i, 4);
+            modelo2.setValueAt(getC.getDireccion(), i, 5);
+            modelo2.setValueAt(getC.getCorreo(), i, 6);
+        }
+    }
+
+    public AdministracionClientes(ControladorCliente contraCli) {
         initComponents();
+        this.contraCli = contraCli;
+        listCliente = contraCli.getCliente();
+        CrearModelo2();
+        actualizarTabla(listCliente);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         txtBusca = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        tabla2 = new javax.swing.JTable();
+        cedula = new javax.swing.JRadioButton();
+        nombre = new javax.swing.JRadioButton();
+        apellido = new javax.swing.JRadioButton();
+        correo = new javax.swing.JRadioButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -56,7 +115,7 @@ public class AdministracionClientes extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -67,48 +126,53 @@ public class AdministracionClientes extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tabla2);
 
-        jLabel2.setText("Ingrese Cedula del cliente:");
+        buttonGroup1.add(cedula);
+        cedula.setText("Cedula/Ruc");
 
-        jButton2.setText("Listar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        buttonGroup1.add(nombre);
+        nombre.setText("Nombre");
+
+        buttonGroup1.add(apellido);
+        apellido.setText("Apellido");
+
+        buttonGroup1.add(correo);
+        correo.setText("Correo");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
                         .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(16, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cedula)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nombre)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(apellido)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(correo)
+                        .addGap(27, 27, 27)
+                        .addComponent(btnBuscar))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnBuscar)
-                        .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBuscar)
+                    .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cedula)
+                    .addComponent(nombre)
+                    .addComponent(apellido)
+                    .addComponent(correo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
@@ -134,12 +198,6 @@ public class AdministracionClientes extends javax.swing.JInternalFrame {
         });
 
         jLabel1.setText("Apellido");
-
-        txtApellido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -250,41 +308,39 @@ public class AdministracionClientes extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidoActionPerformed
-
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String busqueda = txtBusca.getText();
         if (busqueda.equals("")) {
             JOptionPane.showMessageDialog(null, "No dejar campos vacíos");
         } else {
-
-            cli = contraCli.searchCedula(busqueda);
-
-            System.out.println(cli.toString());
+            if(cedula.isSelected()){
+               actualizarTabla(contraCli.buscar(busqueda, 1));
+            }else{
+                if(nombre.isSelected()){
+                        actualizarTabla( contraCli.buscar(busqueda, 2));
+                }else{
+                    if(apellido.isSelected()){
+                       actualizarTabla( contraCli.buscar(busqueda, 3)); 
+                    }else{
+                        if(correo.isSelected()){
+                           actualizarTabla  (contraCli.buscar(busqueda, 4));
+                        }
+                    }
+                }
+            }
+                
         }
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-
-        ArrayList<Cliente> list;
-
-        list = contraCli.getCliente();
-        for (Cliente cliente : list) {
-            System.out.println(cliente.toString());
-        }
-
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton apellido;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JRadioButton cedula;
+    private javax.swing.JRadioButton correo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
@@ -294,7 +350,8 @@ public class AdministracionClientes extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JRadioButton nombre;
+    private javax.swing.JTable tabla2;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtBusca;
     private javax.swing.JTextField txtCorreo;
