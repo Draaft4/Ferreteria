@@ -10,8 +10,7 @@ public class AdministracionClientes extends javax.swing.JInternalFrame {
 
     ControladorCliente contraCli;
     ArrayList<Cliente> listCliente;
-    Cliente cli;
-
+   
     DefaultTableModel modelo2;
 
     private void CrearModelo2() {
@@ -299,36 +298,35 @@ public class AdministracionClientes extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        cli.setNombre(txtNombre.getText());
-        cli.setApellido(txtApellido.getText());
-        cli.setCedula(txtRUC.getText());
-        cli.setCorreo(txtCorreo.getText());
-        cli.setDireccion(txtDireccion.getText());
-        cli.setTelefono(txtTelefono.getText());
-
+       Cliente cl = new Cliente(0,txtNombre.getText(),txtApellido.getText(),txtTelefono.getText(),txtRUC.getText(),txtDireccion.getText(),txtCorreo.getText());
+       contraCli.insertCliente(cl);
+       contraCli.actualizarInformacion();
+       CrearModelo2();
+        actualizarTabla(contraCli.getCliente());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        CrearModelo2();
         String busqueda = txtBusca.getText();
         if (busqueda.equals("")) {
             JOptionPane.showMessageDialog(null, "No dejar campos vacíos");
         } else {
-            if(cedula.isSelected()){
-               actualizarTabla(contraCli.buscar(busqueda, 1));
-            }else{
-                if(nombre.isSelected()){
-                        actualizarTabla( contraCli.buscar(busqueda, 2));
-                }else{
-                    if(apellido.isSelected()){
-                       actualizarTabla( contraCli.buscar(busqueda, 3)); 
-                    }else{
-                        if(correo.isSelected()){
-                           actualizarTabla  (contraCli.buscar(busqueda, 4));
+            if (cedula.isSelected()) {
+                actualizarTabla(contraCli.buscar(busqueda, 1));
+            } else {
+                if (nombre.isSelected()) {
+                    actualizarTabla(contraCli.buscar(busqueda, 2));
+                } else {
+                    if (apellido.isSelected()) {
+                        actualizarTabla(contraCli.buscar(busqueda, 3));
+                    } else {
+                        if (correo.isSelected()) {
+                            actualizarTabla(contraCli.buscar(busqueda, 4));
                         }
                     }
                 }
             }
-                
+
         }
 
     }//GEN-LAST:event_btnBuscarActionPerformed
