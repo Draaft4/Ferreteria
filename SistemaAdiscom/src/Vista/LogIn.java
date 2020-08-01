@@ -14,7 +14,6 @@ public class LogIn extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Inicio de sesion - Adiscom");
         cuser = new ControladorUsuarios();
-        cuser.print();
         usuario.requestFocus();
     }
 
@@ -139,7 +138,7 @@ public class LogIn extends javax.swing.JFrame {
                 usuario.requestFocus();
         } else {
             if (cuser.verificar(usuario.getText(), new String(txtcontrasenia.getPassword()))) {
-                VentanaPrincipal menu = new VentanaPrincipal();
+                VentanaPrincipal menu = new VentanaPrincipal(cuser.getNivelAccesoActual());
                 menu.setVisible(true);
                 this.dispose();
             } else {

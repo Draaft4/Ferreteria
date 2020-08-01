@@ -9,6 +9,11 @@ public class ControladorUsuarios implements ControladorGenerico {
 
     UsuarioBD base;
     ArrayList<Usuario> listUsuario;
+    int nivelAccesoActual=0;
+
+    public int getNivelAccesoActual() {
+        return nivelAccesoActual;
+    }
 
     public ControladorUsuarios() {
         base = new UsuarioBD();
@@ -30,6 +35,7 @@ public class ControladorUsuarios implements ControladorGenerico {
         }
         if (usrObtn != null) {
             if (usrObtn.getPassword().equals(pass)) {
+                nivelAccesoActual= usrObtn.getNivelAcceso();
                 return true;
             } else {
                 return false;

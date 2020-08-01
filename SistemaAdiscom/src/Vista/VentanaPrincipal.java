@@ -9,9 +9,10 @@ import Controladores.ControladorKardexDetalles;
 import Controladores.ControladorMetodoPago;
 import Controladores.ControladorProductos;
 import Controladores.ControladorTarjeta;
+import javax.swing.JOptionPane;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
-
+    int NivelAcceso;
     Facturacion viewFacturacion;
     infFactura viewInfFactura;
     adminProductos viewProductos;
@@ -27,8 +28,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     ControladorFacturaDetalles controlFacturaDetalles;
     ControladorKardexDetalles controlKardexDetalle;
 
-    public VentanaPrincipal() {
-
+    public VentanaPrincipal(int nivelAcceso) {
+        
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setTitle("Sistema Adiscom");
         viewFacturacion = new Facturacion();
@@ -45,6 +46,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         controlFacturaCabecera = new ControladorFacturaCabecera(controlCliente.getCliente(), controlMetodoPago.getMetodoPago(), controlFacturaDetalles.getListDetalle());
         controlKardexDetalle = new ControladorKardexDetalles();
         controlKardexCabecera = new ControladorKardexCabecera(controlKardexDetalle.getListKardexDet());
+        this.NivelAcceso=nivelAcceso;
         initComponents();
     }
 
@@ -143,30 +145,62 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /*
+    Nivel de acceso 1= Administrador
+    Nivel de acceso 2 = Cajera
+    Nivel de acceso 3 = bodega
+    Nivel de acceso 4 = contabilidad
+    
+    */
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        esc.add(viewFacturacion);
-        viewFacturacion.setVisible(true);
+        if(NivelAcceso==1 || NivelAcceso==2 || NivelAcceso==4){
+         esc.add(viewFacturacion);
+        viewFacturacion.setVisible(true);   
+        }else{
+             JOptionPane.showMessageDialog(null, "No tiene acceso a esta ventana ");
+        }
+        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        esc.add(viewInfFactura);
+        if(NivelAcceso==1 || NivelAcceso==2 || NivelAcceso==4){
+         esc.add(viewInfFactura);
         viewInfFactura.setVisible(true);
+        }else{
+             JOptionPane.showMessageDialog(null, "No tiene acceso a esta ventana ");
+        }
+        
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+       if(NivelAcceso==1 || NivelAcceso==3 || NivelAcceso==4){
         esc.add(viewProductos);
         viewProductos.setVisible(true);
+        }else{
+             JOptionPane.showMessageDialog(null, "No tiene acceso a esta ventana ");
+        }
+        
+        
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        esc.add(viewClientes);
+       if(NivelAcceso==1 || NivelAcceso==2 || NivelAcceso==4){
+         esc.add(viewClientes);
         viewClientes.setVisible(true);
+        }else{
+             JOptionPane.showMessageDialog(null, "No tiene acceso a esta ventana ");
+        }
+        
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        esc.add(viewKardex);
+         if(NivelAcceso==1 || NivelAcceso==4){
+         esc.add(viewKardex);
         viewKardex.setVisible(true);
+        }else{
+             JOptionPane.showMessageDialog(null, "No tiene acceso a esta ventana ");
+        }
+        
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     public static void main(String args[]) {
@@ -196,7 +230,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaPrincipal().setVisible(true);
+                new VentanaPrincipal(1).setVisible(true);
             }
         });
     }
