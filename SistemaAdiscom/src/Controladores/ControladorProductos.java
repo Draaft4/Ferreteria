@@ -52,14 +52,13 @@ public class ControladorProductos implements ControladorGenerico {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public Producto searchCodigo(String codigo){
+    public Producto searchCodigo(int codigo){
     
         Producto pro=null;
       
         for(Producto producto : listProducto){
             
-            if(codigo.equalsIgnoreCase(producto.get)){
-                
+            if(codigo == producto.getCodigo()){ 
                 pro=producto;
             }
         }
