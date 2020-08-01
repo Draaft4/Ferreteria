@@ -45,7 +45,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         controlKardexCabecera = new ControladorKardexCabecera();
         controlFacturaDetalles= new ControladorFacturaDetalles(controlProducto.getProducto(),controlFacturaCabecera.getFacturaCab());
         controlKardexDetalle = new  ControladorKardexDetalles(controlKardexCabecera.getKardexCab());
-        controlMetodoPago.print();
+        controlKardexCabecera.print();
     }
 
     @SuppressWarnings("unchecked")
