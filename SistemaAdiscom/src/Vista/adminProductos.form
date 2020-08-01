@@ -239,11 +239,11 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jScrollPane2" min="-2" pref="698" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Component id="jTextField7" min="-2" pref="227" max="-2" attributes="0"/>
+                          <Component id="txtBusqueda" min="-2" pref="227" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="radioNumFact" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbntCodigo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="radioNomClien" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbtnNombre" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -257,9 +257,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="radioNumFact" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="radioNomClien" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtBusqueda" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbntCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="rbtnNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -270,28 +270,31 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="jTextField7">
+        <Component class="javax.swing.JTextField" name="txtBusqueda">
         </Component>
-        <Component class="javax.swing.JRadioButton" name="radioNumFact">
+        <Component class="javax.swing.JRadioButton" name="rbntCodigo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Num. Factura"/>
+            <Property name="text" type="java.lang.String" value="Codigo"/>
           </Properties>
           <Events>
-            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="radioNumFactFocusGained"/>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="rbntCodigoFocusGained"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="radioNomClien">
+        <Component class="javax.swing.JRadioButton" name="rbtnNombre">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Nom. Cliente"/>
+            <Property name="text" type="java.lang.String" value="Nombre"/>
           </Properties>
           <Events>
-            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="radioNomClienFocusGained"/>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="rbtnNombreFocusGained"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnBuscar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
           <AuxValues>

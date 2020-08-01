@@ -21,7 +21,7 @@ public class ClientesDB {
         while (rs.next()){
             int codigo= rs.getInt("cli_id");
             String cedula= rs.getString("cli_cedula_ruc");
-            String nombre= rs.getString("cli_cedula_ruc");
+            String nombre= rs.getString("cli_nombre");
             String apellido= rs.getString("cli_apellido");
             String telefono= rs.getString("cli_telefono");
             String correo= rs.getString("cli_correo");

@@ -7,6 +7,7 @@ package Vista;
 
 import Controladores.ControladorCliente;
 import Modelo.Cliente;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class AdministracionClientes extends javax.swing.JInternalFrame {
@@ -24,13 +25,11 @@ public class AdministracionClientes extends javax.swing.JInternalFrame {
 
         jPanel2 = new javax.swing.JPanel();
         txtBusca = new javax.swing.JTextField();
-        radioCedula = new javax.swing.JRadioButton();
-        radioNomClien = new javax.swing.JRadioButton();
-        radioTelefono = new javax.swing.JRadioButton();
         btnBuscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        radioCorreo = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -49,22 +48,6 @@ public class AdministracionClientes extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("Administracion Clientes");
-
-        radioCedula.setText("Cedula/Ruc");
-        radioCedula.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                radioCedulaFocusGained(evt);
-            }
-        });
-
-        radioNomClien.setText("Nom. Cliente");
-        radioNomClien.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                radioNomClienFocusGained(evt);
-            }
-        });
-
-        radioTelefono.setText("Telefono");
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -86,43 +69,46 @@ public class AdministracionClientes extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(jTable1);
 
-        radioCorreo.setText("Correo Electr.");
+        jLabel2.setText("Ingrese Cedula del cliente:");
+
+        jButton2.setText("Listar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
                         .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(radioCedula)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(radioNomClien)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(radioTelefono)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(radioCorreo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnBuscar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addContainerGap(16, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscar)
-                    .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(radioCedula)
-                    .addComponent(radioNomClien)
-                    .addComponent(radioTelefono)
-                    .addComponent(radioCorreo))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnBuscar)
+                        .addComponent(txtBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton2))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
@@ -254,14 +240,6 @@ public class AdministracionClientes extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void radioCedulaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_radioCedulaFocusGained
-        radioNomClien.setSelected(false);
-    }//GEN-LAST:event_radioCedulaFocusGained
-
-    private void radioNomClienFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_radioNomClienFocusGained
-        radioCedula.setSelected(false);
-    }//GEN-LAST:event_radioNomClienFocusGained
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         cli.setNombre(txtNombre.getText());
         cli.setApellido(txtApellido.getText());
@@ -282,27 +260,34 @@ public class AdministracionClientes extends javax.swing.JInternalFrame {
       if (busqueda.equals("")){
            JOptionPane.showMessageDialog(null, "No dejar campos vacíos");    
       } else {
-          if(radioCedula.isSelected()){
-            //buscar en la bd por cedula
-        }else if(radioNomClien.isSelected()){
-            // buscar por nombre
-        }else if(radioTelefono.isSelected()){
-            //buscar por telefono
-        }else if(radioCorreo.isSelected()){
-            //buscar por correo electrónico
-        }else {
-             JOptionPane.showMessageDialog(null, "Seleccionar el campo por el que desea buscar ");
-        }
+        
+         cli= contraCli.searchCedula(busqueda);
+         
+          System.out.println(cli.toString());
       }
           
        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        ArrayList<Cliente>list;
+        
+        list=contraCli.getCliente();
+          for (Cliente cliente : list) {
+            System.out.println(cliente.toString());
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
@@ -313,10 +298,6 @@ public class AdministracionClientes extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JRadioButton radioCedula;
-    private javax.swing.JRadioButton radioCorreo;
-    private javax.swing.JRadioButton radioNomClien;
-    private javax.swing.JRadioButton radioTelefono;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtBusca;
     private javax.swing.JTextField txtCorreo;

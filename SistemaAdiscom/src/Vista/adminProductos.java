@@ -45,9 +45,9 @@ public class adminProductos extends javax.swing.JInternalFrame {
         jTextField6 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jTextField7 = new javax.swing.JTextField();
-        radioNumFact = new javax.swing.JRadioButton();
-        radioNomClien = new javax.swing.JRadioButton();
+        txtBusqueda = new javax.swing.JTextField();
+        rbntCodigo = new javax.swing.JRadioButton();
+        rbtnNombre = new javax.swing.JRadioButton();
         btnBuscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -160,21 +160,26 @@ public class adminProductos extends javax.swing.JInternalFrame {
                         .addGap(51, 51, 51))))
         );
 
-        radioNumFact.setText("Num. Factura");
-        radioNumFact.addFocusListener(new java.awt.event.FocusAdapter() {
+        rbntCodigo.setText("Codigo");
+        rbntCodigo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                radioNumFactFocusGained(evt);
+                rbntCodigoFocusGained(evt);
             }
         });
 
-        radioNomClien.setText("Nom. Cliente");
-        radioNomClien.addFocusListener(new java.awt.event.FocusAdapter() {
+        rbtnNombre.setText("Nombre");
+        rbtnNombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                radioNomClienFocusGained(evt);
+                rbtnNombreFocusGained(evt);
             }
         });
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -198,11 +203,11 @@ public class adminProductos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(radioNumFact)
+                        .addComponent(rbntCodigo)
                         .addGap(18, 18, 18)
-                        .addComponent(radioNomClien)
+                        .addComponent(rbtnNombre)
                         .addGap(18, 18, 18)
                         .addComponent(btnBuscar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -212,9 +217,9 @@ public class adminProductos extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(radioNumFact)
-                    .addComponent(radioNomClien)
+                    .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbntCodigo)
+                    .addComponent(rbtnNombre)
                     .addComponent(btnBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,13 +250,29 @@ public class adminProductos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void radioNumFactFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_radioNumFactFocusGained
-        radioNomClien.setSelected(false);
-    }//GEN-LAST:event_radioNumFactFocusGained
+    private void rbntCodigoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_rbntCodigoFocusGained
+        rbtnNombre.setSelected(false);
+    }//GEN-LAST:event_rbntCodigoFocusGained
 
-    private void radioNomClienFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_radioNomClienFocusGained
-        radioNumFact.setSelected(false);
-    }//GEN-LAST:event_radioNomClienFocusGained
+    private void rbtnNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_rbtnNombreFocusGained
+        rbntCodigo.setSelected(false);
+    }//GEN-LAST:event_rbtnNombreFocusGained
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        String search=txtBusqueda.getText();
+        
+        if(rbtnNombre.isSelected()){
+            
+            
+            
+        }else{
+            
+        }
+        
+        
+        
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -277,9 +298,9 @@ public class adminProductos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JRadioButton radioNomClien;
-    private javax.swing.JRadioButton radioNumFact;
+    private javax.swing.JRadioButton rbntCodigo;
+    private javax.swing.JRadioButton rbtnNombre;
+    private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -18,6 +18,7 @@ public class ControladorCliente implements ControladorGenerico{
    
     
     public void print(){
+        
         for (Cliente cliente : lista) {
             System.out.println(cliente.toString());
         }
@@ -34,8 +35,11 @@ public class ControladorCliente implements ControladorGenerico{
 
     @Override
     public void read(String codigo) {
-       
+    ;
+        
     }
+       
+    
 
     @Override
     public void update(Object obj) {
@@ -52,6 +56,23 @@ public class ControladorCliente implements ControladorGenerico{
         return null;
        
     }
+
+public Cliente searchCedula(String cedula){
+
     
-    
+       Cliente cli = null;
+        for (Cliente cliente : lista) {
+            if(cedula.equalsIgnoreCase(cliente.getCedula())){
+                
+             cli=cliente;    
+            }
+        }
+        return cli;
 }
+
+
+}
+
+    
+    
+
