@@ -22,8 +22,6 @@ public class VentanaKardex extends javax.swing.JInternalFrame {
         this.contProducto=contpro;
         this.contKardexC=contka;
         listKardexC=contKardexC.getKardexCab();
-        CrearModelo2();
-        
     }
 
     @SuppressWarnings("unchecked")
@@ -253,7 +251,6 @@ public class VentanaKardex extends javax.swing.JInternalFrame {
             modelo2.setValueAt(getC.getFechaEdit(), i, 0);
             modelo2.setValueAt(getC.getDetalle(), i, 1);
             modelo2.setValueAt(prod.getPrecio()+"", i, 2);
-            System.out.println(getC.toString());
            if(compra.equalsIgnoreCase(getC.getDetalle())){
             modelo2.setValueAt(getC.getCantEntr(), i, 3);
             modelo2.setValueAt(getC.getValTotlEnt(), i, 4);
@@ -262,8 +259,9 @@ public class VentanaKardex extends javax.swing.JInternalFrame {
             modelo2.setValueAt("", i, 4);  
            }
            if(venta.equalsIgnoreCase(getC.getDetalle())){
-             modelo2.setValueAt(getC.getValTotlSal(), i, 5);  
-               modelo2.setValueAt(getC.getCantSal(), i, 6);
+               System.out.println(getC.getValTotlSal());
+             modelo2.setValueAt(getC.getValTotlSal(), i, 6);  
+               modelo2.setValueAt(getC.getCantSal(), i, 5);
            }else {
               modelo2.setValueAt("", i, 5);  
                modelo2.setValueAt("", i, 6); 
@@ -278,7 +276,8 @@ public class VentanaKardex extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         ArrayList<Producto>listProducto=contProducto.getProducto();
         int codigo=Integer.parseInt(txtCodigo.getText());
-        
+        CrearModelo2();
+        ArrayList<KardexDet> listDetalles = new ArrayList();
         for (Producto producto : listProducto) {
             
             if(codigo==producto.getCodigo()){
@@ -290,11 +289,18 @@ public class VentanaKardex extends javax.swing.JInternalFrame {
                 for (KardexCab kardex : listKardexC) {
                     
                     if(producto.getIdKardexCab()== kardex.getId()){
-              
+                        
                         vkardex=kardex;
                         txtValor.setText(kardex.getValMin()+"");
                         Imprime.setText(kardex.getDetalles());
-                        actualizarTabla(vkardex.getDetall());
+                       
+                        for (KardexDet kardexDet : kardex.getDetall()) {
+                            if(kardexDet.getCab()==kardex.getId()){
+                                listDetalles.add(kardexDet);
+                            }
+                        }
+                         actualizarTabla(listDetalles);
+                        break;
                     }
                     
                 }

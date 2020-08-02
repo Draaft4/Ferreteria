@@ -30,9 +30,8 @@ public class KardexDetDB {
                 double karDetSalValorTotal = rs.getDouble("kar_det_sal_total");
                 int karDetSaldoCantidad = rs.getInt("kar_det_saldo_cantidad");
                 double karDetSaldoValorTotal = rs.getDouble("kar_det_saldo_total");
-
                 int kardexCabid = rs.getInt("fr_kardex_cabecera_kar_id");
-                KardexDet cl = new KardexDet(codigo, karDetFecha, karDetDetalle, karDetValorUnit, codigo, karDetValorUnit, codigo, karDetEnValorTotal, codigo, karDetValorUnit, kardexCabid);
+                KardexDet cl = new KardexDet(codigo, karDetFecha, karDetDetalle, karDetValorUnit, codigo, karDetValorUnit, codigo, karDetEnValorTotal, codigo, karDetSaldoValorTotal, kardexCabid);
 
                 kardexdet.add(cl);
             }

@@ -25,13 +25,14 @@ public class KardexCabDB {
                 int codigo = rs.getInt("kar_id");
                 int valorminimo = rs.getInt("KR_VALOR_MINIMO");
                 String kardetalle = rs.getString("kar_det_detalle");
-
+                
                 for (KardexDet kardexDet : detalles) {
-                    if (kardexDet.getCab() == codigo) {
+                    int cab = kardexDet.getCab();
+                    if (cab == codigo) {
                         kardex.add(kardexDet);
+                        
                     }
                 }
-
                 KardexCab cl = new KardexCab(codigo, valorminimo, kardetalle, kardex);
                 kardexcab.add(cl);
             }
