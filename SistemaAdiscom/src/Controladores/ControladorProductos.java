@@ -8,8 +8,10 @@ import java.util.List;
 
 public class ControladorProductos implements ControladorGenerico {
 
-    ProductoDB base;
+    ProductoDB base ;
     ArrayList<Producto> listProducto;
+    
+    
 
     public ControladorProductos(ArrayList<Categoria> listCategoria) {
         base = new ProductoDB(listCategoria);
@@ -21,10 +23,43 @@ public class ControladorProductos implements ControladorGenerico {
             System.out.println(producto.toString());
         }
     }
+    
+     public ArrayList<Producto> buscar(String parametro, int tipo) {
+        ArrayList<Producto> busqueda = new ArrayList<Producto>();
+        switch (tipo) {
+            case 1:
+                //Busqueda por codigo
+                for (Producto producto: listProducto) {
+                    if (String.valueOf(producto.getCodigo()).equals(parametro)) {
+                        busqueda.add(producto);
+                    }
+                }
+                break;
+            case 2:
+                //Busqueda por nombre
+                for (Producto producto : listProducto) {
+                    if (producto.getNombre().equalsIgnoreCase(parametro)) {
+                        busqueda.add(producto);
+                    }
+                }
+                break;
+           
+        }
+        return busqueda;
+    }
+
 
     public ArrayList<Producto> getProducto() {
         return listProducto;
     }
+    
+    public void insertProducto(Producto producto) {
+        base.insert(producto);
+    }
+     public void actualizarInformacion(){
+        listProducto = base.ListProductos();
+    }
+
 
     @Override
     public void create(Object obj) {

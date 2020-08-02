@@ -4,10 +4,12 @@ import ConexionBD.BaseDeDatos;
 import Modelo.Categoria;
 import Modelo.Producto;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class ProductoDB {
 
@@ -37,7 +39,8 @@ public class ProductoDB {
                         cat = categoria;
                     }
                 }
-                Producto cl = new Producto(codigo, nombre, desc, precio, stock, procedencia, cat);
+                int idKarCab = rs.getInt("fr_kardex_cabecera_kar_id");
+                Producto cl = new Producto(codigo, nombre, desc, precio, stock, procedencia, cat,idKarCab);
                 producto.add(cl);
             }
         } catch (SQLException ex) {
@@ -45,6 +48,29 @@ public class ProductoDB {
             System.out.println("Error en listado");
         }
         return producto;
+    }
+    
+    
+    public void insert(Producto producto) {
+        try {
+            Connection cnx = BaseDeDatos.getConnection();
+            //permite hacer transacciones eliminar insertar
+            PreparedStatement pst = cnx.prepareStatement("INSERT INTO  "
+                    + "FR_Productos (  pro_id,pro_nombre ,pro_descripcion,pro_precio_unitario," +
+                    "pro_stock,pro_procedencia,fr_categorias_cat_id, fr_kardex_cabecera_kar_id) "
+                    + "VALUES(  FR_productos_SEQ.nextval, ?, ?, ? ,?,?,?)");
+            pst.setString(1, producto.getNombre());
+            pst.setString(2, producto.getDesc());
+            pst.setString(3, String.valueOf(producto.getPrecio()));
+            pst.setString(4, String.valueOf(producto.getStock()));
+            pst.setString(5, producto.getProcedencia());
+            pst.setString(6, producto.getCat().getCodigo()+"");
+            pst.setString(7, String.valueOf(producto.getIdKardexCab()));
+            pst.executeUpdate();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }
 
 }

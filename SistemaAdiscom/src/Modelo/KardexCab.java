@@ -8,12 +8,14 @@ public class KardexCab {
     private int valMin;
     private String detalles;
     private ArrayList<KardexDet> detall;
+   
 
     public KardexCab(int id, int valMin, String detalles, ArrayList<KardexDet> detall) {
         this.id = id;
         this.valMin = valMin;
         this.detalles = detalles;
         this.detall = detall;
+        
     }
 
     public int getId() {

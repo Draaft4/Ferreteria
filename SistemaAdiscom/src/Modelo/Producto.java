@@ -9,8 +9,10 @@ public class Producto {
     private int stock;
     private String procedencia;
     private Categoria cat;
+    private int idKardexCab;
+    
 
-    public Producto(int codigo, String nombre, String desc, double precio, int stock, String procedencia, Categoria cat) {
+    public Producto(int codigo, String nombre, String desc, double precio, int stock, String procedencia, Categoria cat, int idKardexCab) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.desc = desc;
@@ -18,6 +20,15 @@ public class Producto {
         this.stock = stock;
         this.cat = cat;
         this.procedencia = procedencia;
+        this.idKardexCab = idKardexCab;
+    }
+
+    public int getIdKardexCab() {
+        return idKardexCab;
+    }
+
+    public void setIdKardexCab(int idKardexCab) {
+        this.idKardexCab = idKardexCab;
     }
 
     public String getProcedencia() {
@@ -78,9 +89,9 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" + "codigo=" + codigo + ", nombre=" + nombre + ", desc="
-                + desc + ", precio=" + precio + ", stock=" + stock
-                + ", procedencia=" + procedencia + ", cat=" + cat.toString() + '}';
+        return "Producto{" + "codigo=" + codigo + ", nombre=" + nombre + ", desc=" + desc + ", precio=" + precio + ", stock=" + stock + ", procedencia=" + procedencia + ", cat=" + cat + ", idKardexCab=" + idKardexCab + '}';
     }
+
+  
 
 }
