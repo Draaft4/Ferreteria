@@ -48,7 +48,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         viewInfFactura = new infFactura();
         viewProductos = new adminProductos(controlProducto, controlCategoria);
         viewClientes = new AdministracionClientes(controlCliente);
-        viewKardex = new VentanaKardex();
+        viewKardex = new VentanaKardex(controlProducto, controlKardexCabecera);
         initComponents();
     }
 
