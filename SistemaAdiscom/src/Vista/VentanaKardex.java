@@ -243,7 +243,8 @@ public class VentanaKardex extends javax.swing.JInternalFrame {
         //int id, Date fechaEdit, String detalle, double valUnit, int cantEntr, double valTotlEnt, int cantSal, double valTotlSal, int cantSaldo, double saldo, int cab
         
         Object O[] = null;
-        
+        String venta="venta";
+        String compra="compra";
         for (int i = 0; i < listKardexDet.size(); i++) {
             modelo2.addRow(O);
            
@@ -251,11 +252,27 @@ public class VentanaKardex extends javax.swing.JInternalFrame {
             modelo2.setValueAt(getC.getFechaEdit(), i, 0);
             modelo2.setValueAt(getC.getDetalle(), i, 1);
             modelo2.setValueAt(getC.getValUnit(), i, 2);
+           if(compra.equalsIgnoreCase(getC.getDetalle())){
             modelo2.setValueAt(getC.getCantEntr(), i, 3);
             modelo2.setValueAt(getC.getValTotlEnt(), i, 4);
-            modelo2.setValueAt(getC.getCantSal(), i, 5);
-            modelo2.setValueAt(getC.getValTotlSal(), i, 6);
+           }else  {
+               modelo2.setValueAt("", i, 3);
+            modelo2.setValueAt("", i, 4);  
+           }
+           if(venta.equalsIgnoreCase(getC.getDetalle())){
+             modelo2.setValueAt(getC.getValTotlSal(), i, 5);  
+               modelo2.setValueAt(getC.getCantSal(), i, 6);
+           }else {
+              modelo2.setValueAt("", i, 5);  
+               modelo2.setValueAt("", i, 6); 
+           }
+           modelo2.setValueAt(getC.getCantSal(), i, 7);
+            modelo2.setValueAt(getC.getSaldo(), i, 8);
+           
+             
+            
         }
+        
     }
     
     private void bntBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntBuscarActionPerformed
