@@ -10,7 +10,6 @@ public class Producto {
     private String procedencia;
     private Categoria cat;
     private int idKardexCab;
-    
 
     public Producto(int codigo, String nombre, String desc, double precio, int stock, String procedencia, Categoria cat, int idKardexCab) {
         this.codigo = codigo;
@@ -91,7 +90,5 @@ public class Producto {
     public String toString() {
         return "Producto{" + "codigo=" + codigo + ", nombre=" + nombre + ", desc=" + desc + ", precio=" + precio + ", stock=" + stock + ", procedencia=" + procedencia + ", cat=" + cat + ", idKardexCab=" + idKardexCab + '}';
     }
-
-  
 
 }

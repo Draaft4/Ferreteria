@@ -14,8 +14,8 @@ public class ControladorCliente implements ControladorGenerico {
     public ControladorCliente() {
         lista = base.ListClientes();
     }
-    
-    public void actualizarInformacion(){
+
+    public void actualizarInformacion() {
         lista = base.ListClientes();
     }
 
@@ -97,7 +97,7 @@ public class ControladorCliente implements ControladorGenerico {
 
     @Override
     public void update(Object obj) {
-        
+
     }
 
 }

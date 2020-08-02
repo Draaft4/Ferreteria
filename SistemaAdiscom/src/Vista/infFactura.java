@@ -5,24 +5,27 @@ import Modelo.FacturaCab;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
+
 public class infFactura extends javax.swing.JInternalFrame {
+
     DefaultTableModel modelo2;
     ControladorFacturaCabecera controlCabecera;
     ArrayList<FacturaCab> listCabecera;
+
     public infFactura(ControladorFacturaCabecera controlCabecera) {
         initComponents();
         CrearModelo2();
-        this.controlCabecera=controlCabecera;
-        this.listCabecera=controlCabecera.getFacturaCab();
+        this.controlCabecera = controlCabecera;
+        this.listCabecera = controlCabecera.getFacturaCab();
         actualizarTabla(listCabecera);
     }
-    
+
     private void CrearModelo2() {
         //int id, String numero, Date fechaEmision, double subtotal, double desc, double IVA, double total, String anulado, Cliente cliente, MetodoPago metodoPago, ArrayList<FacturaDet> detalles
         try {
             modelo2 = (new DefaultTableModel(
                     null, new String[]{
-                        "Codigo", "Numero","Cliente",
+                        "Codigo", "Numero", "Cliente",
                         "Fecha Emision", "Subtotal", "Descuento", "Iva", "Total", "Estado"}) {
                 Class[] types = new Class[]{
                     java.lang.String.class,
@@ -36,7 +39,7 @@ public class infFactura extends javax.swing.JInternalFrame {
                     java.lang.String.class
                 };
                 boolean[] canEdit = new boolean[]{
-                    false,false, false, false, false, false, false, false, false
+                    false, false, false, false, false, false, false, false, false
                 };
 
                 @Override
@@ -55,33 +58,33 @@ public class infFactura extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.toString() + "error2");
         }
     }
-    
+
     public void actualizarTabla(ArrayList<FacturaCab> listCabecera) {
         /*
          "Codigo", "Numero","Cliente",
                         "Fecha Emision", "Subtotal", "Descuento", "Iva", "Total", "Estado"
         
-        */
+         */
         Object O[] = null;
-        
+
         for (int i = 0; i < listCabecera.size(); i++) {
             modelo2.addRow(O);
-           
+
             FacturaCab getC = (FacturaCab) listCabecera.get(i);
             modelo2.setValueAt(getC.getId(), i, 0);
             modelo2.setValueAt(getC.getNumero(), i, 1);
-            modelo2.setValueAt(getC.getCliente().getNombre()+" "+getC.getCliente().getApellido(), i, 2);
+            modelo2.setValueAt(getC.getCliente().getNombre() + " " + getC.getCliente().getApellido(), i, 2);
             modelo2.setValueAt(getC.getFechaEmision(), i, 3);
             modelo2.setValueAt(getC.getSubtotal(), i, 4);
             modelo2.setValueAt(getC.getDesc(), i, 5);
             modelo2.setValueAt(getC.getIVA(), i, 6);
             modelo2.setValueAt(getC.getTotal(), i, 7);
-            if(getC.getAnulado()==null){
-                modelo2.setValueAt("Activo", i, 8); 
-            }else{
-                modelo2.setValueAt(getC.getAnulado(), i, 8); 
+            if (getC.getAnulado() == null) {
+                modelo2.setValueAt("Activo", i, 8);
+            } else {
+                modelo2.setValueAt(getC.getAnulado(), i, 8);
             }
-           
+
         }
     }
 
@@ -231,25 +234,25 @@ public class infFactura extends javax.swing.JInternalFrame {
             } else {
                 if (radioNom.isSelected()) {
                     actualizarTabla(controlCabecera.buscar(busqueda, 2));
-                } 
+                }
             }
 
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        int fila =tabla1.getSelectedRow();
-        String codigo= tabla1.getValueAt(fila, 0)+"";
+
+        int fila = tabla1.getSelectedRow();
+        String codigo = tabla1.getValueAt(fila, 0) + "";
         for (FacturaCab facturaCab : listCabecera) {
-            if(codigo.equals(facturaCab.getId()+"")){
+            if (codigo.equals(facturaCab.getId() + "")) {
                 viewFact wosFact = new viewFact(facturaCab);
                 wosFact.setVisible(true);
                 wosFact.setLocationRelativeTo(null);
                 break;
             }
         }
-  
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -42,8 +42,8 @@ public class ClientesDB {
             Connection cnx = BaseDeDatos.getConnection();
             //permite hacer transacciones eliminar insertar
             PreparedStatement pst = cnx.prepareStatement("INSERT INTO  "
-                    + "FR_Clientes (  cli_id ,cli_cedula_ruc ,cli_nombre,cli_apellido," +
-                    "cli_telefono,cli_correo,cli_direccion) "
+                    + "FR_Clientes (  cli_id ,cli_cedula_ruc ,cli_nombre,cli_apellido,"
+                    + "cli_telefono,cli_correo,cli_direccion) "
                     + "VALUES(  FR_CLIENTES_SEQ.nextval, ?, ?, ? ,?,?,?)");
             pst.setString(1, cliente.getCedula());
             pst.setString(2, cliente.getNombre());

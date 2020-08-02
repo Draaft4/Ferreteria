@@ -4,11 +4,15 @@ import ConexionBD.BaseDeDatos;
 import Modelo.KardexCab;
 import Modelo.KardexDet;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 public class KardexDetDB {
 
@@ -40,6 +44,48 @@ public class KardexDetDB {
             System.out.println("Error en listado Kardex Detalle");
         }
         return kardexdet;
+    }
+
+    public void insert(KardexDet kardex) {
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Connection cnx = BaseDeDatos.getConnection();
+            //permite hacer transacciones eliminar insertar
+            PreparedStatement pst = cnx.prepareStatement("INSERT INTO  "
+                    + "FR_kardex_detalle ("
+                    + "    kar_det_id,"
+                    + "    fr_kardex_cabecera_kar_id,"
+                    + "    KAR_DET_FECHA,"
+                    + "    kar_det_detalle,"
+                    + "    kar_det_entr_cantidad,"
+                    + "    kar_det_entr_valor_unit,"
+                    + "    kar_det_entr_total,"
+                    + "    kar_det_sal_cantidad,"
+                    +      "kar_det_sal_valor_unit,"
+                    + "    kar_det_sal_total,"
+                    + "    kar_det_saldo_cantidad,"
+                    + "    kar_det_saldo_valor_unit,"
+                    + "    kar_det_saldo_total"
+                    + "    ) "
+                    + "VALUES( ?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            pst.setInt(1, kardex.getId());
+            pst.setInt(2, kardex.getCab());
+            pst.setDate(3, new java.sql.Date(kardex.getFechaEdit().getTime()));
+            pst.setString(4, kardex.getDetalle());
+            pst.setInt(5, kardex.getCantEntr());
+            pst.setDouble(6, kardex.getValUnit());
+            pst.setDouble(7, kardex.getValTotlEnt());
+            pst.setInt(8, kardex.getCantSal());
+            pst.setDouble(9, kardex.getValUnit());
+            pst.setDouble(10, kardex.getValTotlSal());
+            pst.setInt(11, kardex.getCantSaldo() );
+            pst.setDouble(12, kardex.getValUnit() );
+            pst.setDouble(13, kardex.getSaldo() );
+            pst.executeUpdate();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error Ingresando Detalle:\n"+  ex.getMessage());
+        }
     }
 
 }

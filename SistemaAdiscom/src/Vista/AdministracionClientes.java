@@ -10,7 +10,7 @@ public class AdministracionClientes extends javax.swing.JInternalFrame {
 
     ControladorCliente contraCli;
     ArrayList<Cliente> listCliente;
-   
+
     DefaultTableModel modelo2;
 
     private void CrearModelo2() {
@@ -298,10 +298,10 @@ public class AdministracionClientes extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       Cliente cl = new Cliente(0,txtNombre.getText(),txtApellido.getText(),txtTelefono.getText(),txtRUC.getText(),txtDireccion.getText(),txtCorreo.getText());
-       contraCli.insertCliente(cl);
-       contraCli.actualizarInformacion();
-       CrearModelo2();
+        Cliente cl = new Cliente(0, txtNombre.getText(), txtApellido.getText(), txtTelefono.getText(), txtRUC.getText(), txtDireccion.getText(), txtCorreo.getText());
+        contraCli.insertCliente(cl);
+        contraCli.actualizarInformacion();
+        CrearModelo2();
         actualizarTabla(contraCli.getCliente());
     }//GEN-LAST:event_jButton1ActionPerformed
 

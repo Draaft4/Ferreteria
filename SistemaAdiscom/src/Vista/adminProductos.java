@@ -1,7 +1,7 @@
-
 package Vista;
 
 import Controladores.ControladorCategorias;
+import Controladores.ControladorKardexCabecera;
 import Controladores.ControladorProductos;
 import Modelo.Categoria;
 import Modelo.Producto;
@@ -10,12 +10,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class adminProductos extends javax.swing.JInternalFrame {
-    ControladorProductos controlPro;   
+
+    ControladorProductos controlPro;
     ArrayList<Producto> listProducto;
     DefaultTableModel modelo2;
     ControladorCategorias controlCat;
-    
-    
+    ControladorKardexCabecera controlKardex;
+
     private void CrearModelo2() {
 
         try {
@@ -58,7 +59,7 @@ public class adminProductos extends javax.swing.JInternalFrame {
         Object O[] = null;
         for (int i = 0; i < listProducto.size(); i++) {
             modelo2.addRow(O);
-           
+
             Producto getC = (Producto) listProducto.get(i);
             modelo2.setValueAt(getC.getCodigo(), i, 0);
             modelo2.setValueAt(getC.getNombre(), i, 1);
@@ -66,15 +67,17 @@ public class adminProductos extends javax.swing.JInternalFrame {
             modelo2.setValueAt(getC.getPrecio(), i, 3);
             modelo2.setValueAt(getC.getStock(), i, 4);
             modelo2.setValueAt(getC.getProcedencia(), i, 5);
-            modelo2.setValueAt(getC.getCat(), i, 6);
+            modelo2.setValueAt(getC.getCat().getNombreCat(), i, 6);
         }
     }
 
-       ArrayList<Categoria> listCategoria ;
-    public adminProductos(ControladorProductos controlPro, ControladorCategorias controlCat) {
+    ArrayList<Categoria> listCategoria;
+
+    public adminProductos(ControladorProductos controlPro, ControladorCategorias controlCat,ControladorKardexCabecera controlKardex) {
         initComponents();
         this.controlPro = controlPro;
         this.controlCat = controlCat;
+        this.controlKardex = controlKardex;
         listCategoria = controlCat.getCategoria();
         for (Categoria categoria : listCategoria) {
             jComboBox1.addItem(categoria.getNombreCat());
@@ -84,7 +87,6 @@ public class adminProductos extends javax.swing.JInternalFrame {
         actualizarTabla(listProducto);
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -106,7 +108,7 @@ public class adminProductos extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         precio = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtValMin = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         nuevaCat = new java.awt.Button();
@@ -141,7 +143,7 @@ public class adminProductos extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Valor Unitario:");
 
-        jLabel8.setText("Valor Total:");
+        jLabel8.setText("Minimo Stock:");
 
         jButton1.setText("Registrar Producto");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -152,6 +154,11 @@ public class adminProductos extends javax.swing.JInternalFrame {
 
         nuevaCat.setActionCommand("+");
         nuevaCat.setLabel("+");
+        nuevaCat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevaCatActionPerformed(evt);
+            }
+        });
 
         buttonGroup2.add(nacional);
         nacional.setText("Nacional");
@@ -208,7 +215,7 @@ public class adminProductos extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(precio)
-                            .addComponent(jTextField6))))
+                            .addComponent(txtValMin))))
                 .addGap(67, 67, 67))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -248,11 +255,11 @@ public class adminProductos extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel7)
                                     .addComponent(precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel8)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(51, 51, 51))))
+                                    .addComponent(txtValMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap())))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(nuevaCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -359,7 +366,7 @@ public class adminProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_rbtnNombreFocusGained
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-         CrearModelo2();
+        CrearModelo2();
         String busqueda = txtBusqueda.getText();
 
         if (busqueda.equals("")) {
@@ -370,7 +377,7 @@ public class adminProductos extends javax.swing.JInternalFrame {
             } else {
                 if (rbtnNombre.isSelected()) {
                     actualizarTabla(controlPro.buscar(busqueda, 2));
-                } 
+                }
             }
 
         }
@@ -378,26 +385,32 @@ public class adminProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Categoria cat=null;
-        String procedencia ="";
+        Categoria cat = null;
+        String procedencia = "";
         if (nacional.isSelected()) {
-            procedencia = "Nacional";
-        } else if(extranjero.isSelected()){
-            procedencia ="Extranjero";
+            procedencia = "N";
+        } else if (extranjero.isSelected()) {
+            procedencia = "E";
         }
-        for (int i = 0; i < listCategoria.size(); i++){ 
-            if(jComboBox1.getSelectedIndex() ==i){
+        for (int i = 0; i < listCategoria.size(); i++) {
+            if (jComboBox1.getSelectedIndex() == i) {
                 cat = listCategoria.get(i);
-                System.out.println(cat.toString());
             }
         }
- 
-        Producto pro = new Producto(0,nombre.getText(), descripcion.getText(), Double.parseDouble(precio.getText()), Integer.parseInt(stock.getText()), procedencia,cat ,0);
-       controlPro.insertProducto(pro);
-       controlPro.actualizarInformacion();
-       CrearModelo2();
+
+        Producto pro = new Producto(0, nombre.getText(), descripcion.getText(), Double.parseDouble(precio.getText()), Integer.parseInt(stock.getText()), procedencia, cat, 0);
+        System.out.println(pro.getProcedencia());
+        int id = controlKardex.generarNuevo(pro, Integer.parseInt(stock.getText()),Integer.parseInt(txtValMin.getText()));
+        pro.setIdKardexCab(id);
+        controlPro.insertProducto(pro);
+        controlPro.actualizarInformacion();
+        CrearModelo2();
         actualizarTabla(controlPro.getProducto());
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void nuevaCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaCatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nuevaCatActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -420,7 +433,6 @@ public class adminProductos extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JRadioButton nacional;
     private javax.swing.JTextField nombre;
     private java.awt.Button nuevaCat;
@@ -430,6 +442,7 @@ public class adminProductos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField stock;
     private javax.swing.JTable tabla1;
     private javax.swing.JTextField txtBusqueda;
+    private javax.swing.JTextField txtValMin;
     // End of variables declaration//GEN-END:variables
 
 }

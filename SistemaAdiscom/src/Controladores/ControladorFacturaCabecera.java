@@ -27,13 +27,13 @@ public class ControladorFacturaCabecera implements ControladorGenerico {
     public ArrayList<FacturaCab> getFacturaCab() {
         return listCabecera;
     }
-    
-     public ArrayList<FacturaCab> buscar(String parametro, int tipo) {
+
+    public ArrayList<FacturaCab> buscar(String parametro, int tipo) {
         ArrayList<FacturaCab> busqueda = new ArrayList<FacturaCab>();
         switch (tipo) {
             case 1:
                 //Busqueda por codigo
-                for (FacturaCab facturaCab: listCabecera) {
+                for (FacturaCab facturaCab : listCabecera) {
                     if (String.valueOf(facturaCab.getNumero()).equals(parametro)) {
                         busqueda.add(facturaCab);
                     }
@@ -41,13 +41,13 @@ public class ControladorFacturaCabecera implements ControladorGenerico {
                 break;
             case 2:
                 //Busqueda por nombre
-                for (FacturaCab facturaCab: listCabecera) {
+                for (FacturaCab facturaCab : listCabecera) {
                     if (facturaCab.getCliente().getNombre().equalsIgnoreCase(parametro)) {
                         busqueda.add(facturaCab);
                     }
                 }
                 break;
-           
+
         }
         return busqueda;
     }

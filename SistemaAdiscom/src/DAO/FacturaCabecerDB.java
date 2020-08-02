@@ -64,7 +64,7 @@ public class FacturaCabecerDB {
 
                 FacturaCab cl = new FacturaCab(id, numero, fechaEmision, subtotal, desc, iva, total, anulado, cli, met, detalles);
                 facturaCab.add(cl);
-              
+
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

@@ -7,50 +7,51 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class viewFact extends javax.swing.JFrame {
+
     FacturaCab factura;
     ArrayList<FacturaDet> listDetalle;
     DefaultTableModel modelo2;
-    
+
     public viewFact(FacturaCab factura) {
         initComponents();
         this.setTitle("Visualizacion Factura");
-        this.factura=factura;
+        this.factura = factura;
         txtRUC.setText(factura.getCliente().getCedula());
-        txtNombre.setText(factura.getCliente().getNombre()+" "+factura.getCliente().getApellido());
+        txtNombre.setText(factura.getCliente().getNombre() + " " + factura.getCliente().getApellido());
         txtDireccion.setText(factura.getCliente().getDireccion());
         txtTelefono.setText(factura.getCliente().getTelefono());
         txtCorreo.setText(factura.getCliente().getCorreo());
         txtFactNum.setText(factura.getNumero());
         dcFecha.setDate(factura.getFechaEmision());
-        txtSubtotal.setText(factura.getSubtotal()+"");
-        txtDescuento.setText(factura.getDesc()+"");
-        txtIVA.setText(factura.getIVA()+"");
-        txtTotal.setText(factura.getTotal()+"");
-        if(factura.getMetodoPago().getTarjeta()==null){
-           radioEfect.setSelected(true);
-           txtNumTarj.setEnabled(false);
-          dcFechVencTarj.setEnabled(false);
-           txtCvvTarj.setEnabled(false);
-           radioTarj.setEnabled(false);
-        }else{
-           radioEfect.setEnabled(false);
-           txtNumTarj.setText(factura.getMetodoPago().getTarjeta().getNumero());
-           dcFechVencTarj.setDate(factura.getMetodoPago().getTarjeta().getFechaVenc());
-           txtCvvTarj.setText(factura.getMetodoPago().getTarjeta().getCvv()+"");
-           radioTarj.setEnabled(true);  
+        txtSubtotal.setText(factura.getSubtotal() + "");
+        txtDescuento.setText(factura.getDesc() + "");
+        txtIVA.setText(factura.getIVA() + "");
+        txtTotal.setText(factura.getTotal() + "");
+        if (factura.getMetodoPago().getTarjeta() == null) {
+            radioEfect.setSelected(true);
+            txtNumTarj.setEnabled(false);
+            dcFechVencTarj.setEnabled(false);
+            txtCvvTarj.setEnabled(false);
+            radioTarj.setEnabled(false);
+        } else {
+            radioEfect.setEnabled(false);
+            txtNumTarj.setText(factura.getMetodoPago().getTarjeta().getNumero());
+            dcFechVencTarj.setDate(factura.getMetodoPago().getTarjeta().getFechaVenc());
+            txtCvvTarj.setText(factura.getMetodoPago().getTarjeta().getCvv() + "");
+            radioTarj.setEnabled(true);
         }
-        listDetalle=factura.getDetalles();
+        listDetalle = factura.getDetalles();
         CrearModelo2();
         actualizarTabla(listDetalle);
     }
-    
+
     private void CrearModelo2() {
         //int id, int cant, double precio, double desc, double subtotal, boolean devuelto, Producto producto
         try {
             modelo2 = (new DefaultTableModel(
                     null, new String[]{
-                        "Codigo", "Producto","Cantidad",
-                        "Precio Unitario",  "Descuento","Subtotal"}) {
+                        "Codigo", "Producto", "Cantidad",
+                        "Precio Unitario", "Descuento", "Subtotal"}) {
                 Class[] types = new Class[]{
                     java.lang.String.class,
                     java.lang.String.class,
@@ -60,7 +61,7 @@ public class viewFact extends javax.swing.JFrame {
                     java.lang.String.class
                 };
                 boolean[] canEdit = new boolean[]{
-                    false,false, false, false, false, false
+                    false, false, false, false, false, false
                 };
 
                 @Override
@@ -79,27 +80,26 @@ public class viewFact extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.toString() + "error2");
         }
     }
-    
+
     public void actualizarTabla(ArrayList<FacturaDet> listDetalles) {
         /*
          "Codigo", "Producto","Cantidad",
                         "Precio Unitario", "Subtotal", "Descuento",
         
-        */
+         */
         Object O[] = null;
-        
+
         for (int i = 0; i < listDetalle.size(); i++) {
             modelo2.addRow(O);
-           
+
             FacturaDet getC = (FacturaDet) listDetalle.get(i);
             modelo2.setValueAt(getC.getId(), i, 0);
             modelo2.setValueAt(getC.getProducto().getNombre(), i, 1);
-            modelo2.setValueAt(getC.getCant()+"", i, 2);
-            modelo2.setValueAt(getC.getProducto().getPrecio()+"", i, 3);
+            modelo2.setValueAt(getC.getCant() + "", i, 2);
+            modelo2.setValueAt(getC.getProducto().getPrecio() + "", i, 3);
             modelo2.setValueAt(getC.getDesc(), i, 4);
             modelo2.setValueAt(getC.getSubtotal(), i, 5);
-            
-                      
+
         }
     }
 

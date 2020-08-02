@@ -10,18 +10,20 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class VentanaKardex extends javax.swing.JInternalFrame {
- ControladorProductos contProducto;
- ControladorKardexCabecera contKardexC;
- DefaultTableModel modelo2;
-    ArrayList<KardexCab>listKardexC;
+
+    ControladorProductos contProducto;
+    ControladorKardexCabecera contKardexC;
+    DefaultTableModel modelo2;
+    ArrayList<KardexCab> listKardexC;
     Producto prod;
-    
+
     KardexCab vkardex;
+
     public VentanaKardex(ControladorProductos contpro, ControladorKardexCabecera contka) {
         initComponents();
-        this.contProducto=contpro;
-        this.contKardexC=contka;
-        listKardexC=contKardexC.getKardexCab();
+        this.contProducto = contpro;
+        this.contKardexC = contka;
+        listKardexC = contKardexC.getKardexCab();
     }
 
     @SuppressWarnings("unchecked")
@@ -195,10 +197,10 @@ public class VentanaKardex extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
-       
+
     }//GEN-LAST:event_txtCodigoActionPerformed
 
-     private void CrearModelo2() {
+    private void CrearModelo2() {
 
         try {
             modelo2 = (new DefaultTableModel(
@@ -236,79 +238,77 @@ public class VentanaKardex extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.toString() + "error2");
         }
     }
-     
-         
-     public void actualizarTabla(ArrayList<KardexDet>listKardexDet) {
+
+    public void actualizarTabla(ArrayList<KardexDet> listKardexDet) {
         //int id, Date fechaEdit, String detalle, double valUnit, int cantEntr, double valTotlEnt, int cantSal, double valTotlSal, int cantSaldo, double saldo, int cab
-        
+
         Object O[] = null;
-        String venta="venta";
-        String compra="compra";
+        String venta = "venta";
+        String compra = "compra";
         for (int i = 0; i < listKardexDet.size(); i++) {
             modelo2.addRow(O);
-           
+
             KardexDet getC = (KardexDet) listKardexDet.get(i);
             modelo2.setValueAt(getC.getFechaEdit(), i, 0);
             modelo2.setValueAt(getC.getDetalle(), i, 1);
-            modelo2.setValueAt(prod.getPrecio()+"", i, 2);
-           if(compra.equalsIgnoreCase(getC.getDetalle())){
-            modelo2.setValueAt(getC.getCantEntr(), i, 3);
-            modelo2.setValueAt(getC.getValTotlEnt(), i, 4);
-           }else  {
-               modelo2.setValueAt("", i, 3);
-            modelo2.setValueAt("", i, 4);  
-           }
-           if(venta.equalsIgnoreCase(getC.getDetalle())){
-               System.out.println(getC.getValTotlSal());
-             modelo2.setValueAt(getC.getValTotlSal(), i, 6);  
-               modelo2.setValueAt(getC.getCantSal(), i, 5);
-           }else {
-              modelo2.setValueAt("", i, 5);  
-               modelo2.setValueAt("", i, 6); 
-           }
-           modelo2.setValueAt(getC.getCantSal(), i, 7);
-            modelo2.setValueAt(getC.getSaldo(), i, 8);            
+            modelo2.setValueAt(prod.getPrecio() + "", i, 2);
+            if (compra.equalsIgnoreCase(getC.getDetalle())) {
+                modelo2.setValueAt(getC.getCantEntr(), i, 3);
+                modelo2.setValueAt(getC.getValTotlEnt(), i, 4);
+            } else {
+                modelo2.setValueAt("", i, 3);
+                modelo2.setValueAt("", i, 4);
+            }
+            if (venta.equalsIgnoreCase(getC.getDetalle())) {
+                System.out.println(getC.getValTotlSal());
+                modelo2.setValueAt(getC.getValTotlSal(), i, 6);
+                modelo2.setValueAt(getC.getCantSal(), i, 5);
+            } else {
+                modelo2.setValueAt("", i, 5);
+                modelo2.setValueAt("", i, 6);
+            }
+            modelo2.setValueAt(getC.getCantSal(), i, 7);
+            modelo2.setValueAt(getC.getSaldo(), i, 8);
         }
-        
+
     }
-    
+
     private void bntBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntBuscarActionPerformed
         // TODO add your handling code here:
-        ArrayList<Producto>listProducto=contProducto.getProducto();
-        int codigo=Integer.parseInt(txtCodigo.getText());
+        ArrayList<Producto> listProducto = contProducto.getProducto();
+        int codigo = Integer.parseInt(txtCodigo.getText());
         CrearModelo2();
         ArrayList<KardexDet> listDetalles = new ArrayList();
         for (Producto producto : listProducto) {
-            
-            if(codigo==producto.getCodigo()){
+
+            if (codigo == producto.getCodigo()) {
                 this.prod = producto;
-                
+
                 txtNombre.setText(producto.getNombre());
-                txtStock.setText(producto.getStock()+"");
-                
+                txtStock.setText(producto.getStock() + "");
+
                 for (KardexCab kardex : listKardexC) {
-                    
-                    if(producto.getIdKardexCab()== kardex.getId()){
-                        
-                        vkardex=kardex;
-                        txtValor.setText(kardex.getValMin()+"");
+
+                    if (producto.getIdKardexCab() == kardex.getId()) {
+
+                        vkardex = kardex;
+                        txtValor.setText(kardex.getValMin() + "");
                         Imprime.setText(kardex.getDetalles());
-                       
+
                         for (KardexDet kardexDet : kardex.getDetall()) {
-                            if(kardexDet.getCab()==kardex.getId()){
+                            if (kardexDet.getCab() == kardex.getId()) {
                                 listDetalles.add(kardexDet);
                             }
                         }
-                         actualizarTabla(listDetalles);
+                        actualizarTabla(listDetalles);
                         break;
                     }
-                    
+
                 }
-                
+
             }
         }
-        
-        
+
     }//GEN-LAST:event_bntBuscarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

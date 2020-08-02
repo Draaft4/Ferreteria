@@ -40,7 +40,7 @@ public class ProductoDB {
                     }
                 }
                 int idKarCab = rs.getInt("fr_kardex_cabecera_kar_id");
-                Producto cl = new Producto(codigo, nombre, desc, precio, stock, procedencia, cat,idKarCab);
+                Producto cl = new Producto(codigo, nombre, desc, precio, stock, procedencia, cat, idKarCab);
                 producto.add(cl);
             }
         } catch (SQLException ex) {
@@ -49,23 +49,22 @@ public class ProductoDB {
         }
         return producto;
     }
-    
-    
+
     public void insert(Producto producto) {
         try {
             Connection cnx = BaseDeDatos.getConnection();
             //permite hacer transacciones eliminar insertar
             PreparedStatement pst = cnx.prepareStatement("INSERT INTO  "
-                    + "FR_Productos (  pro_id,pro_nombre ,pro_descripcion,pro_precio_unitario," +
-                    "pro_stock,pro_procedencia,fr_categorias_cat_id, fr_kardex_cabecera_kar_id) "
-                    + "VALUES(  FR_productos_SEQ.nextval, ?, ?, ? ,?,?,?)");
+                    + "FR_Productos (  pro_id,pro_nombre ,pro_descripcion,pro_precio_unitario,"
+                    + "pro_stock,pro_procedencia,fr_categorias_cat_id, fr_kardex_cabecera_kar_id) "
+                    + "VALUES(  FR_productos_SEQ.nextval, ?, ?, ? ,?,?,?,?)");
             pst.setString(1, producto.getNombre());
             pst.setString(2, producto.getDesc());
-            pst.setString(3, String.valueOf(producto.getPrecio()));
-            pst.setString(4, String.valueOf(producto.getStock()));
+            pst.setDouble(3, producto.getPrecio());
+            pst.setInt(4, producto.getStock());
             pst.setString(5, producto.getProcedencia());
-            pst.setString(6, producto.getCat().getCodigo()+"");
-            pst.setString(7, String.valueOf(producto.getIdKardexCab()));
+            pst.setInt(6, producto.getCat().getCodigo());
+            pst.setInt(7, producto.getIdKardexCab());
             pst.executeUpdate();
 
         } catch (SQLException ex) {
