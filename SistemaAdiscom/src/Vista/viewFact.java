@@ -1,16 +1,113 @@
 package Vista;
 
-public class viewFact extends javax.swing.JFrame {
+import Modelo.FacturaCab;
+import Modelo.FacturaDet;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
-    public viewFact() {
+public class viewFact extends javax.swing.JFrame {
+    FacturaCab factura;
+    ArrayList<FacturaDet> listDetalle;
+    DefaultTableModel modelo2;
+    
+    public viewFact(FacturaCab factura) {
         initComponents();
         this.setTitle("Visualizacion Factura");
+        this.factura=factura;
+        txtRUC.setText(factura.getCliente().getCedula());
+        txtNombre.setText(factura.getCliente().getNombre()+" "+factura.getCliente().getApellido());
+        txtDireccion.setText(factura.getCliente().getDireccion());
+        txtTelefono.setText(factura.getCliente().getTelefono());
+        txtCorreo.setText(factura.getCliente().getCorreo());
+        txtFactNum.setText(factura.getNumero());
+        dcFecha.setDate(factura.getFechaEmision());
+        txtSubtotal.setText(factura.getSubtotal()+"");
+        txtDescuento.setText(factura.getDesc()+"");
+        txtIVA.setText(factura.getIVA()+"");
+        txtTotal.setText(factura.getTotal()+"");
+        if(factura.getMetodoPago().getTarjeta()==null){
+           radioEfect.setSelected(true);
+           txtNumTarj.setEnabled(false);
+          dcFechVencTarj.setEnabled(false);
+           txtCvvTarj.setEnabled(false);
+           radioTarj.setEnabled(false);
+        }else{
+           radioEfect.setEnabled(false);
+           txtNumTarj.setText(factura.getMetodoPago().getTarjeta().getNumero());
+           dcFechVencTarj.setDate(factura.getMetodoPago().getTarjeta().getFechaVenc());
+           txtCvvTarj.setText(factura.getMetodoPago().getTarjeta().getCvv()+"");
+           radioTarj.setEnabled(true);  
+        }
+        listDetalle=factura.getDetalles();
+        CrearModelo2();
+        actualizarTabla(listDetalle);
+    }
+    
+    private void CrearModelo2() {
+        //int id, int cant, double precio, double desc, double subtotal, boolean devuelto, Producto producto
+        try {
+            modelo2 = (new DefaultTableModel(
+                    null, new String[]{
+                        "Codigo", "Producto","Cantidad",
+                        "Precio Unitario",  "Descuento","Subtotal"}) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class
+                };
+                boolean[] canEdit = new boolean[]{
+                    false,false, false, false, false, false
+                };
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            tabla1.setModel(modelo2);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString() + "error2");
+        }
+    }
+    
+    public void actualizarTabla(ArrayList<FacturaDet> listDetalles) {
+        /*
+         "Codigo", "Producto","Cantidad",
+                        "Precio Unitario", "Subtotal", "Descuento",
+        
+        */
+        Object O[] = null;
+        
+        for (int i = 0; i < listDetalle.size(); i++) {
+            modelo2.addRow(O);
+           
+            FacturaDet getC = (FacturaDet) listDetalle.get(i);
+            modelo2.setValueAt(getC.getId(), i, 0);
+            modelo2.setValueAt(getC.getProducto().getNombre(), i, 1);
+            modelo2.setValueAt(getC.getCant()+"", i, 2);
+            modelo2.setValueAt(getC.getProducto().getPrecio()+"", i, 3);
+            modelo2.setValueAt(getC.getDesc(), i, 4);
+            modelo2.setValueAt(getC.getSubtotal(), i, 5);
+            
+                      
+        }
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel6 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -20,7 +117,6 @@ public class viewFact extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtRUC = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
         dcFecha = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -39,7 +135,7 @@ public class viewFact extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla1 = new javax.swing.JTable();
         jLabel14 = new javax.swing.JLabel();
         txtSubtotal = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -47,7 +143,7 @@ public class viewFact extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         txtIVA = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTotal = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         radioEfect = new javax.swing.JRadioButton();
@@ -56,8 +152,8 @@ public class viewFact extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         txtNumTarj = new javax.swing.JTextField();
-        txtFechVencTarj = new javax.swing.JTextField();
         txtCvvTarj = new javax.swing.JTextField();
+        dcFechVencTarj = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -97,8 +193,6 @@ public class viewFact extends javax.swing.JFrame {
         jLabel3.setText("Datos del Cliente");
 
         jLabel4.setText("RUC/Cedula del Cliente:");
-
-        btnBuscar.setText("Buscar");
 
         jLabel5.setText("Fecha:");
 
@@ -145,9 +239,7 @@ public class viewFact extends javax.swing.JFrame {
                                     .addComponent(jLabel6)
                                     .addComponent(jLabel7))
                                 .addGap(43, 43, 43))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnBuscar)
-                                .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 86, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -158,9 +250,7 @@ public class viewFact extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRUC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar))
+                .addComponent(txtRUC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -228,7 +318,7 @@ public class viewFact extends javax.swing.JFrame {
 
         jLabel13.setText("Detalle Factura:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -239,8 +329,8 @@ public class viewFact extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane1.setViewportView(jTable1);
+        tabla1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane1.setViewportView(tabla1);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -275,13 +365,15 @@ public class viewFact extends javax.swing.JFrame {
 
         jLabel1.setText("Forma de Pago:");
 
+        buttonGroup1.add(radioEfect);
         radioEfect.setText("Efectivo");
 
+        buttonGroup1.add(radioTarj);
         radioTarj.setText("Tarjeta de Credito/Debito");
 
         jLabel2.setText("Numero:");
 
-        jLabel20.setText("Fecha de Vencimiento:");
+        jLabel20.setText("Fecha de Caducidad:");
 
         jLabel21.setText("C.V.V:");
 
@@ -310,27 +402,34 @@ public class viewFact extends javax.swing.JFrame {
                                     .addComponent(jLabel21)
                                     .addComponent(jLabel20))
                                 .addGap(25, 25, 25)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNumTarj)
-                            .addComponent(txtFechVencTarj, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                            .addComponent(txtCvvTarj))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtNumTarj, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                                .addComponent(txtCvvTarj))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(dcFechVencTarj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(13, 13, 13)
-                .addComponent(radioTarj)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtNumTarj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radioEfect)
-                    .addComponent(jLabel20)
-                    .addComponent(txtFechVencTarj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(radioTarj)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtNumTarj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(radioEfect)
+                            .addComponent(jLabel20)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(dcFechVencTarj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCvvTarj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -374,7 +473,7 @@ public class viewFact extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel17)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -407,10 +506,10 @@ public class viewFact extends javax.swing.JFrame {
                     .addComponent(jLabel16)
                     .addComponent(txtIVA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
@@ -424,28 +523,29 @@ public class viewFact extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 857, Short.MAX_VALUE)
+            .addGap(0, 940, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 5, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 6, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 670, Short.MAX_VALUE)
+            .addGap(0, 604, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private com.toedter.calendar.JDateChooser dcFechVencTarj;
     private com.toedter.calendar.JDateChooser dcFecha;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -479,21 +579,20 @@ public class viewFact extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JRadioButton radioEfect;
     private javax.swing.JRadioButton radioTarj;
+    private javax.swing.JTable tabla1;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtCvvTarj;
     private javax.swing.JTextField txtDescuento;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtFactNum;
-    private javax.swing.JTextField txtFechVencTarj;
     private javax.swing.JTextField txtIVA;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNumTarj;
     private javax.swing.JTextField txtRUC;
     private javax.swing.JTextField txtSubtotal;
     private javax.swing.JTextField txtTelefono;
+    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }

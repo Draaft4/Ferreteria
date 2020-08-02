@@ -40,7 +40,7 @@ public class FacturaCabecerDB {
                 double subtotal = rs.getDouble("cab_subtotal");
                 double desc = rs.getDouble("cab_descuento");
                 double iva = rs.getDouble("cab_iva");
-                double total = rs.getDouble("cab_anulado");
+                double total = rs.getDouble("cab_total");
                 String anulado = rs.getString("cab_anulado");
                 int cliId = rs.getInt("fr_clientes_cli_id");
 
@@ -64,6 +64,7 @@ public class FacturaCabecerDB {
 
                 FacturaCab cl = new FacturaCab(id, numero, fechaEmision, subtotal, desc, iva, total, anulado, cli, met, detalles);
                 facturaCab.add(cl);
+              
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

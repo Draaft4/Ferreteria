@@ -14,6 +14,7 @@ public class VentanaKardex extends javax.swing.JInternalFrame {
  ControladorKardexCabecera contKardexC;
  DefaultTableModel modelo2;
     ArrayList<KardexCab>listKardexC;
+    Producto prod;
     
     KardexCab vkardex;
     public VentanaKardex(ControladorProductos contpro, ControladorKardexCabecera contka) {
@@ -251,7 +252,8 @@ public class VentanaKardex extends javax.swing.JInternalFrame {
             KardexDet getC = (KardexDet) listKardexDet.get(i);
             modelo2.setValueAt(getC.getFechaEdit(), i, 0);
             modelo2.setValueAt(getC.getDetalle(), i, 1);
-            modelo2.setValueAt(getC.getValUnit(), i, 2);
+            modelo2.setValueAt(prod.getPrecio()+"", i, 2);
+            System.out.println(getC.toString());
            if(compra.equalsIgnoreCase(getC.getDetalle())){
             modelo2.setValueAt(getC.getCantEntr(), i, 3);
             modelo2.setValueAt(getC.getValTotlEnt(), i, 4);
@@ -267,10 +269,7 @@ public class VentanaKardex extends javax.swing.JInternalFrame {
                modelo2.setValueAt("", i, 6); 
            }
            modelo2.setValueAt(getC.getCantSal(), i, 7);
-            modelo2.setValueAt(getC.getSaldo(), i, 8);
-           
-             
-            
+            modelo2.setValueAt(getC.getSaldo(), i, 8);            
         }
         
     }
@@ -283,6 +282,7 @@ public class VentanaKardex extends javax.swing.JInternalFrame {
         for (Producto producto : listProducto) {
             
             if(codigo==producto.getCodigo()){
+                this.prod = producto;
                 
                 txtNombre.setText(producto.getNombre());
                 txtStock.setText(producto.getStock()+"");
