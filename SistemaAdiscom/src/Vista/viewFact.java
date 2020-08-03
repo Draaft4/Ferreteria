@@ -43,6 +43,7 @@ public class viewFact extends javax.swing.JFrame {
         listDetalle = factura.getDetalles();
         CrearModelo2();
         actualizarTabla(listDetalle);
+
     }
 
     private void CrearModelo2() {

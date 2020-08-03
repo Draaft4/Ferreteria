@@ -44,9 +44,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         controlKardexDetalle = new ControladorKardexDetalles();
         controlKardexCabecera = new ControladorKardexCabecera(controlKardexDetalle.getListKardexDet());
         this.NivelAcceso = nivelAcceso;
-        viewFacturacion = new Facturacion();
+        viewFacturacion = new Facturacion(controlCliente, controlFacturaCabecera, controlProducto, controlTarjeta,controlMetodoPago);
         viewInfFactura = new infFactura(controlFacturaCabecera);
-        viewProductos = new adminProductos(controlProducto, controlCategoria,controlKardexCabecera);
+        viewProductos = new adminProductos(controlProducto, controlCategoria, controlKardexCabecera);
         viewClientes = new AdministracionClientes(controlCliente);
         viewKardex = new VentanaKardex(controlProducto, controlKardexCabecera);
         initComponents();

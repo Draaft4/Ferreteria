@@ -61,7 +61,7 @@ public class KardexDetDB {
                     + "    kar_det_entr_valor_unit,"
                     + "    kar_det_entr_total,"
                     + "    kar_det_sal_cantidad,"
-                    +      "kar_det_sal_valor_unit,"
+                    + "kar_det_sal_valor_unit,"
                     + "    kar_det_sal_total,"
                     + "    kar_det_saldo_cantidad,"
                     + "    kar_det_saldo_valor_unit,"
@@ -78,13 +78,13 @@ public class KardexDetDB {
             pst.setInt(8, kardex.getCantSal());
             pst.setDouble(9, kardex.getValUnit());
             pst.setDouble(10, kardex.getValTotlSal());
-            pst.setInt(11, kardex.getCantSaldo() );
-            pst.setDouble(12, kardex.getValUnit() );
-            pst.setDouble(13, kardex.getSaldo() );
+            pst.setInt(11, kardex.getCantSaldo());
+            pst.setDouble(12, kardex.getValUnit());
+            pst.setDouble(13, kardex.getSaldo());
             pst.executeUpdate();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error Ingresando Detalle:\n"+  ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error Ingresando Detalle:\n" + ex.getMessage());
         }
     }
 

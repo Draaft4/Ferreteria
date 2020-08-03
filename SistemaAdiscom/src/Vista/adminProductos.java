@@ -73,7 +73,7 @@ public class adminProductos extends javax.swing.JInternalFrame {
 
     ArrayList<Categoria> listCategoria;
 
-    public adminProductos(ControladorProductos controlPro, ControladorCategorias controlCat,ControladorKardexCabecera controlKardex) {
+    public adminProductos(ControladorProductos controlPro, ControladorCategorias controlCat, ControladorKardexCabecera controlKardex) {
         initComponents();
         this.controlPro = controlPro;
         this.controlCat = controlCat;
@@ -399,8 +399,7 @@ public class adminProductos extends javax.swing.JInternalFrame {
         }
 
         Producto pro = new Producto(0, nombre.getText(), descripcion.getText(), Double.parseDouble(precio.getText()), Integer.parseInt(stock.getText()), procedencia, cat, 0);
-        System.out.println(pro.getProcedencia());
-        int id = controlKardex.generarNuevo(pro, Integer.parseInt(stock.getText()),Integer.parseInt(txtValMin.getText()));
+        int id = controlKardex.generarNuevo(pro, Integer.parseInt(stock.getText()), Integer.parseInt(txtValMin.getText()));
         pro.setIdKardexCab(id);
         controlPro.insertProducto(pro);
         controlPro.actualizarInformacion();

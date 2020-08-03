@@ -44,7 +44,7 @@ public class KardexCabDB {
         }
         return kardexcab;
     }
-    
+
     public void insert(KardexCab kardex) {
         try {
             Connection cnx = BaseDeDatos.getConnection();
@@ -54,12 +54,12 @@ public class KardexCabDB {
                     + "VALUES( ?,?,?,?)");
             pst.setInt(1, kardex.getId());
             pst.setInt(2, kardex.getValMin());
-            pst.setInt(3,0);
+            pst.setInt(3, 0);
             pst.setString(4, kardex.getDetalles());
             pst.executeUpdate();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error Ingresando Cabecera:\n"+ ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error Ingresando Cabecera:\n" + ex.getMessage());
         }
     }
 

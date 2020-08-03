@@ -30,13 +30,13 @@ public class ControladorKardexCabecera implements ControladorGenerico {
         }
     }
 
-    public int generarNuevo(Producto producto,int cant,int valmin) {
+    public int generarNuevo(Producto producto, int cant, int valmin) {
         int nuevoDetalle = listDetalles.get(listDetalles.size() - 1).getId() + 1;
-        int nuevoCab = listaKardexcab.get(listaKardexcab.size()-1).getId()+1;
+        int nuevoCab = listaKardexcab.get(listaKardexcab.size() - 1).getId() + 1;
         Date fecha = new Date();
-        KardexDet nuevoDet = new KardexDet(nuevoDetalle, fecha, "Compra", producto.getPrecio(), cant,(double) (producto.getPrecio()*cant), 0, 0, cant,(double) (producto.getPrecio()*cant), nuevoCab);
+        KardexDet nuevoDet = new KardexDet(nuevoDetalle, fecha, "Compra", producto.getPrecio(), cant, (double) (producto.getPrecio() * cant), 0, 0, cant, (double) (producto.getPrecio() * cant), nuevoCab);
         ArrayList<KardexDet> nuevolist = new ArrayList();
-        String detalle = "Control del movimiento del producto "+producto.getNombre();
+        String detalle = "Control del movimiento del producto " + producto.getNombre();
         nuevolist.add(nuevoDet);
         KardexCab nuevoCabecera = new KardexCab(nuevoCab, valmin, detalle, nuevolist);
         base.insert(nuevoCabecera);
