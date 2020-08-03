@@ -714,7 +714,7 @@ String metodoP="";
         
         }
     }//GEN-LAST:event_radioTarjStateChanged
-
+    //Comentario de Recuperacion
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
       //int codigo, String nombre, String apellido, String telefono, String cedula, String direccion, String correo) {
       String nomNuevoCli =txtNombre.getText();
