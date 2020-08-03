@@ -30,18 +30,32 @@ public class ControladorKardexCabecera implements ControladorGenerico {
         }
     }
 
-    public int generarNuevo(Producto producto, int cant, int valmin) {
-        int nuevoDetalle = listDetalles.get(listDetalles.size() - 1).getId() + 1;
-        int nuevoCab = listaKardexcab.get(listaKardexcab.size() - 1).getId() + 1;
-        Date fecha = new Date();
-        KardexDet nuevoDet = new KardexDet(nuevoDetalle, fecha, "Compra", producto.getPrecio(), cant, (double) (producto.getPrecio() * cant), 0, 0, cant, (double) (producto.getPrecio() * cant), nuevoCab);
-        ArrayList<KardexDet> nuevolist = new ArrayList();
-        String detalle = "Control del movimiento del producto " + producto.getNombre();
-        nuevolist.add(nuevoDet);
-        KardexCab nuevoCabecera = new KardexCab(nuevoCab, valmin, detalle, nuevolist);
-        base.insert(nuevoCabecera);
-        base1.insert(nuevoDet);
-        return nuevoCab;
+    public int generarNuevo(Producto producto, int cant, int valmin, int tipo, ArrayList<Producto> listNuevos, ArrayList<Integer> listCant) {
+        if (tipo == 1) {
+            int nuevoDetalle = listDetalles.get(listDetalles.size() - 1).getId() + 1;
+            int nuevoCab = listaKardexcab.get(listaKardexcab.size() - 1).getId() + 1;
+            Date fecha = new Date();
+            KardexDet nuevoDet = new KardexDet(nuevoDetalle, fecha, "Compra", producto.getPrecio(), cant, (double) (producto.getPrecio() * cant), 0, 0, cant, (double) (producto.getPrecio() * cant), nuevoCab);
+            ArrayList<KardexDet> nuevolist = new ArrayList();
+            String detalle = "Control del movimiento del producto " + producto.getNombre();
+            nuevolist.add(nuevoDet);
+            KardexCab nuevoCabecera = new KardexCab(nuevoCab, valmin, detalle, nuevolist);
+            base.insert(nuevoCabecera);
+            base1.insert(nuevoDet);
+            return nuevoCab;
+        } else {
+            //int id, Date fechaEdit, String detalle, double valUnit, int cantEntr, double valTotlEnt, int cantSal, double valTotlSal, int cantSaldo, double saldo, int cab
+            for (Producto listProducto : listNuevos) {
+                int nuevoCab = listProducto.getIdKardexCab();
+                int nuevoDetalle = listDetalles.get(listDetalles.size() - 1).getId() + 1;
+                System.out.println(nuevoDetalle);
+                Date fecha = new Date();
+                KardexDet nuevoDet = new KardexDet(nuevoDetalle, fecha, "Venta", listProducto.getPrecio(),
+                        0, 0, cant, (double) (listProducto.getPrecio() * cant), cant, (double) (listProducto.getPrecio() * cant), nuevoCab);
+                base1.insert(nuevoDet);
+            }
+            return 0;
+        }
     }
 
     public ArrayList<KardexCab> getKardexCab() {

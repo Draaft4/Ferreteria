@@ -1,16 +1,24 @@
 package Controladores;
 
 import DAO.FacturaCabecerDB;
+import DAO.FacturaDetDB;
+import DAO.MetodoPagoDB;
+import DAO.TarjetaDB;
 import Modelo.Cliente;
 import Modelo.FacturaCab;
 import Modelo.FacturaDet;
 import Modelo.MetodoPago;
+import Modelo.TarjetaCredito;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class ControladorFacturaCabecera implements ControladorGenerico {
 
     FacturaCabecerDB base;
+    FacturaDetDB base1 = new FacturaDetDB(null);
+    MetodoPagoDB base2 = new MetodoPagoDB(null);
+    TarjetaDB base3 = new TarjetaDB();
     ArrayList<FacturaCab> listCabecera;
 
     public ControladorFacturaCabecera(ArrayList<Cliente> listCliente, ArrayList<MetodoPago> listMetodoPago, ArrayList<FacturaDet> listDetalle) {
@@ -50,6 +58,24 @@ public class ControladorFacturaCabecera implements ControladorGenerico {
 
         }
         return busqueda;
+    }
+
+    public void insertar(FacturaCab nuevo) {
+        try {
+            TarjetaCredito tarj = nuevo.getMetodoPago().getTarjeta();
+            if (tarj != null) {
+                base3.insert(tarj);
+            }
+            MetodoPago pago = nuevo.getMetodoPago();
+            base2.insert(pago);
+            base.insert(nuevo);
+            for (FacturaDet detalle : nuevo.getDetalles()) {
+                base1.insert(detalle);
+            }
+            JOptionPane.showMessageDialog(null, "Factura Ingresada Correctamenete");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        }
     }
 
     @Override

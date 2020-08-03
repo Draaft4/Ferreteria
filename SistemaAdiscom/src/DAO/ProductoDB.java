@@ -24,7 +24,7 @@ public class ProductoDB {
         try {
             Connection cnx = BaseDeDatos.getConnection();
             Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM fr_productos");
+            ResultSet rs = st.executeQuery("SELECT * FROM fr_productos order by 1");
             while (rs.next()) {
                 Categoria cat = null;
                 int codigo = rs.getInt("pro_id");

@@ -399,7 +399,7 @@ public class adminProductos extends javax.swing.JInternalFrame {
         }
 
         Producto pro = new Producto(0, nombre.getText(), descripcion.getText(), Double.parseDouble(precio.getText()), Integer.parseInt(stock.getText()), procedencia, cat, 0);
-        int id = controlKardex.generarNuevo(pro, Integer.parseInt(stock.getText()), Integer.parseInt(txtValMin.getText()));
+        int id = controlKardex.generarNuevo(pro, Integer.parseInt(stock.getText()), Integer.parseInt(txtValMin.getText()), 1, null, null);
         pro.setIdKardexCab(id);
         controlPro.insertProducto(pro);
         controlPro.actualizarInformacion();

@@ -22,7 +22,7 @@ public class KardexDetDB {
 
             Connection cnx = BaseDeDatos.getConnection();
             Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM fr_kardex_detalle");
+            ResultSet rs = st.executeQuery("SELECT * FROM fr_kardex_detalle order by 1");
             while (rs.next()) {
                 int codigo = rs.getInt("kar_det_id");
                 Date karDetFecha = rs.getDate("kar_det_fecha");

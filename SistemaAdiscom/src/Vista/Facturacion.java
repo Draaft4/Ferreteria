@@ -2,6 +2,8 @@ package Vista;
 
 import Controladores.ControladorCliente;
 import Controladores.ControladorFacturaCabecera;
+import Controladores.ControladorFacturaDetalles;
+import Controladores.ControladorKardexCabecera;
 import Controladores.ControladorMetodoPago;
 import Controladores.ControladorProductos;
 import Controladores.ControladorTarjeta;
@@ -25,15 +27,22 @@ public class Facturacion extends javax.swing.JInternalFrame {
     ControladorProductos contrProd;
     ControladorTarjeta controlTarj;
     ControladorMetodoPago contMetodo;
+    ControladorKardexCabecera contKar;
+    ControladorFacturaDetalles contDet;
     ArrayList<FacturaDet> listDetalles = new ArrayList();
-    int nuevoId, valDet = 1;
+    ArrayList<Producto> listProducto = new ArrayList();
+    ArrayList<Integer> listCant = new ArrayList();
+    int nuevoId, valDet = 0;
 
-    public Facturacion(ControladorCliente controlCliente, ControladorFacturaCabecera controlFactura, ControladorProductos contrProd, ControladorTarjeta controlTarj, ControladorMetodoPago controlMetodo) {
+    public Facturacion(ControladorCliente controlCliente, ControladorFacturaCabecera controlFactura, ControladorProductos contrProd, ControladorTarjeta controlTarj, ControladorMetodoPago controlMetodo, ControladorKardexCabecera contrKard, ControladorFacturaDetalles controlDet) {
         this.controlCliente = controlCliente;
         this.controlFactura = controlFactura;
         this.contrProd = contrProd;
         this.controlTarj = controlTarj;
-        this.contMetodo=controlMetodo;
+        this.contMetodo = controlMetodo;
+        this.contKar = contrKard;
+        this.contDet = controlDet;
+        valDet = controlDet.getListDetalle().get(controlDet.getListDetalle().size() - 1).getId() + 1;
         initComponents();
         txtNombre.setEnabled(false);
         txtApellido.setEnabled(false);
@@ -55,7 +64,7 @@ public class Facturacion extends javax.swing.JInternalFrame {
         modelo2.setValueAt("", 0, 4);
         modelo2.setValueAt("", 0, 5);
         txtDescuento.setText("0");
-        
+
     }
 
     private void CrearModelo2() {
@@ -442,6 +451,18 @@ public class Facturacion extends javax.swing.JInternalFrame {
 
         jLabel21.setText("C.V.V:");
 
+        txtFechVencTarj.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtFechVencTarjFocusLost(evt);
+            }
+        });
+
+        txtCvvTarj.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCvvTarjFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -596,7 +617,7 @@ public class Facturacion extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         //if (txtRUC.getText())
     }//GEN-LAST:event_txtRUCActionPerformed
-int idCli=0;
+    int idCli = 0;
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String cedula = txtRUC.getText();
         int numFact = Integer.parseInt(controlFactura.getFacturaCab().get(controlFactura.getFacturaCab().size() - 1).getNumero()) + 1;
@@ -610,8 +631,8 @@ int idCli=0;
             txtTelefono.setText(cliente.getTelefono());
             txtCorreo.setText(cliente.getCorreo());
             dcFecha.setEnabled(true);
-            idCli=cliente.getCodigo();
-            
+            idCli = cliente.getCodigo();
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "El cliente no existe");
             txtNombre.setEnabled(true);
@@ -622,10 +643,9 @@ int idCli=0;
             dcFecha.setEnabled(true);
             btnBuscar.setEnabled(false);
             txtApellido.setEnabled(true);
-            
-            idCli=controlCliente.getCliente().get(controlCliente.getCliente().size()-1).getCodigo()+1;
-            
-            
+
+            idCli = controlCliente.getCliente().get(controlCliente.getCliente().size() - 1).getCodigo() + 1;
+
         }
         txtFactNum.setText(numFact + "");
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -642,7 +662,7 @@ int idCli=0;
                         "Precio Unitario", "Subtotal", "Descuento",
         
              */
-            double subt =0;
+            double subt = 0;
             int fila = tabla1.getSelectedRow();
             String codigo = tabla1.getValueAt(fila, 0) + "";
             if (!codigo.equals("")) {
@@ -651,23 +671,22 @@ int idCli=0;
                     String desc = tabla1.getValueAt(fila, 2) + "";
                     if (!desc.equals("")) {
                         Producto prod = contrProd.buscar(codigo, 1).get(0);
-                        double descuentoCalc=prod.getPrecio()-((prod.getPrecio()* Integer.parseInt(desc))/100);
-                       
-                        FacturaDet nuevoDet = new FacturaDet(valDet, Integer.parseInt(cant), prod.getPrecio(),Integer.parseInt(desc) , (descuentoCalc*Integer.parseInt(cant)), false, prod, nuevoId);
-                        System.out.println(nuevoDet.toString());
+                        double descuentoCalc = prod.getPrecio() - ((prod.getPrecio() * Integer.parseInt(desc)) / 100);
+                        listProducto.add(prod);
+                        listCant.add(Integer.parseInt(cant));
+                        FacturaDet nuevoDet = new FacturaDet(valDet, Integer.parseInt(cant), prod.getPrecio(), Integer.parseInt(desc), (descuentoCalc * Integer.parseInt(cant)), false, prod, nuevoId);
                         listDetalles.add(nuevoDet);
                         actualizarTabla(listDetalles);
                         for (FacturaDet listDetalle : listDetalles) {
-                           subt= subt+listDetalle.getSubtotal();
-                           txtSubtotal.setText(subt+"");
+                            subt = subt + listDetalle.getSubtotal();
+                            txtSubtotal.setText(subt + "");
                         }
-                         double valorIva = subt+(subt*0.12);
-                         txtIVA.setText(valorIva+"");
-                         double descCab = Double.parseDouble(txtDescuento.getText());
-                         double total = valorIva-((valorIva*descCab)/100);
-                         jTextField1.setText(total+"");
-                         
-                        
+                        double valorIva = subt + (subt * 0.12);
+                        txtIVA.setText(valorIva + "");
+                        double descCab = Double.parseDouble(txtDescuento.getText());
+                        double total = valorIva - ((valorIva * descCab) / 100);
+                        jTextField1.setText(total + "");
+
                     } else {
                         JOptionPane.showMessageDialog(null, "Ingrese un descuento valido");
                     }
@@ -688,52 +707,74 @@ int idCli=0;
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             double valorIVA = Double.parseDouble(txtIVA.getText());
             double descCab = Double.parseDouble(txtDescuento.getText());
-                         double total = valorIVA-((valorIVA*descCab)/100);
-                         jTextField1.setText(total+"");
+            double total = valorIVA - ((valorIVA * descCab) / 100);
+            jTextField1.setText(total + "");
         }
     }//GEN-LAST:event_txtDescuentoKeyPressed
-TarjetaCredito tarj;
-String metodoP="";
+    TarjetaCredito tarj;
+    String metodoP = "";
+    Date fechaCad;
     private void radioTarjStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_radioTarjStateChanged
         if (radioTarj.isSelected()) {
-               txtNumTarj.setEnabled(true);
-        txtFechVencTarj.setEnabled(true);
-        txtCvvTarj.setEnabled(true);
-        String numTarj = txtNumTarj.getText();
-        String cvv = txtCvvTarj.getText();
-        Date fechaCad = txtFechVencTarj.getDate();
-       int newid=controlTarj.getTarjetaCredito().get(controlTarj.getTarjetaCredito().size()-1).getCodigo()+1;
-       tarj = new TarjetaCredito(newid, fechaCad, numTarj, cvv);
-       metodoP="Tarjeta";
+            txtNumTarj.setEnabled(true);
+            txtFechVencTarj.setEnabled(true);
+            txtCvvTarj.setEnabled(true);
+            String numTarj = txtNumTarj.getText();
+            String cvv = txtCvvTarj.getText();
+            fechaCad = txtFechVencTarj.getDate();
+            System.out.println(fechaCad);
+            int newid = controlTarj.getTarjetaCredito().get(controlTarj.getTarjetaCredito().size() - 1).getCodigo() + 1;
+            tarj = new TarjetaCredito(newid, fechaCad, numTarj, cvv);
+            metodoP = "Tarjeta";
         } else {
-               txtNumTarj.setEnabled(false);
-        txtFechVencTarj.setEnabled(false);
-        txtCvvTarj.setEnabled(false);
-        tarj=null;
-        metodoP="Contado";
-        
+            txtNumTarj.setEnabled(false);
+            txtFechVencTarj.setEnabled(false);
+            txtCvvTarj.setEnabled(false);
+            tarj = null;
+            metodoP = "Contado";
+
         }
     }//GEN-LAST:event_radioTarjStateChanged
-    //Comentario de Recuperacion
+
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-      //int codigo, String nombre, String apellido, String telefono, String cedula, String direccion, String correo) {
-      String nomNuevoCli =txtNombre.getText();
-      String apNuevoCli = txtApellido.getText();
-      String telefNuevoCli = txtTelefono.getText();
-      String cedNuevoCli = txtRUC.getText();
-      String dirNuevoCli = txtDireccion.getText();
-      String correoNuevoCli = txtCorreo.getText();
-     
-      Cliente cli = new Cliente(idCli, nomNuevoCli, apNuevoCli, telefNuevoCli, cedNuevoCli, dirNuevoCli, correoNuevoCli);
-      //int id, String numero, Date fechaEmision, double subtotal, double desc, double IVA, double total, String anulado, Cliente cliente, MetodoPago metodoPago, ArrayList<FacturaDet> detalles
-      int cod=contMetodo.getMetodoPago().get(contMetodo.getMetodoPago().size()-1).getCodigo()+1;
-      
-        MetodoPago newMetodo= new MetodoPago(cod ,metodoP, tarj);
-      
-      FacturaCab nuevaFactura = new FacturaCab(nuevoId, txtFactNum.getText(),dcFecha.getDate(), Double.parseDouble(txtSubtotal.getText()), Double.parseDouble(txtDescuento.getText()),Double.parseDouble(txtIVA.getText()), Double.parseDouble(jTextField1.getText()),"Activa",cli,newMetodo,listDetalles );
-      
-        System.out.println(nuevaFactura.toString());
+        //int codigo, String nombre, String apellido, String telefono, String cedula, String direccion, String correo) {
+        String nomNuevoCli = txtNombre.getText();
+        String apNuevoCli = txtApellido.getText();
+        String telefNuevoCli = txtTelefono.getText();
+        String cedNuevoCli = txtRUC.getText();
+        String dirNuevoCli = txtDireccion.getText();
+        String correoNuevoCli = txtCorreo.getText();
+
+        Cliente cli = new Cliente(idCli, nomNuevoCli, apNuevoCli, telefNuevoCli, cedNuevoCli, dirNuevoCli, correoNuevoCli);
+        //int id, String numero, Date fechaEmision, double subtotal, double desc, double IVA, double total, String anulado, Cliente cliente, MetodoPago metodoPago, ArrayList<FacturaDet> detalles
+        int cod = contMetodo.getMetodoPago().get(contMetodo.getMetodoPago().size() - 1).getCodigo() + 1;
+
+        MetodoPago newMetodo = new MetodoPago(cod, metodoP, tarj);
+
+        FacturaCab nuevaFactura = new FacturaCab(nuevoId, txtFactNum.getText(), dcFecha.getDate(), Double.parseDouble(txtSubtotal.getText()), Double.parseDouble(txtDescuento.getText()), Double.parseDouble(txtIVA.getText()), Double.parseDouble(jTextField1.getText()), "A", cli, newMetodo, listDetalles);
+        contKar.generarNuevo(null, 0, 0, 2, listProducto, listCant);
+        controlFactura.insertar(nuevaFactura);
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void txtFechVencTarjFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFechVencTarjFocusLost
+        String numTarj = txtNumTarj.getText();
+        String cvv = txtCvvTarj.getText();
+        fechaCad = txtFechVencTarj.getDate();
+        System.out.println(fechaCad);
+        int newid = controlTarj.getTarjetaCredito().get(controlTarj.getTarjetaCredito().size() - 1).getCodigo() + 1;
+        tarj = new TarjetaCredito(newid, fechaCad, numTarj, cvv);
+        metodoP = "Tarjeta";
+    }//GEN-LAST:event_txtFechVencTarjFocusLost
+
+    private void txtCvvTarjFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCvvTarjFocusLost
+        String numTarj = txtNumTarj.getText();
+        String cvv = txtCvvTarj.getText();
+        fechaCad = txtFechVencTarj.getDate();
+        System.out.println(fechaCad);
+        int newid = controlTarj.getTarjetaCredito().get(controlTarj.getTarjetaCredito().size() - 1).getCodigo() + 1;
+        tarj = new TarjetaCredito(newid, fechaCad, numTarj, cvv);
+        metodoP = "Tarjeta";
+    }//GEN-LAST:event_txtCvvTarjFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

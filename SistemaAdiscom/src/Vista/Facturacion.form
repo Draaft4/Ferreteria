@@ -637,10 +637,16 @@
                   </Properties>
                 </Component>
                 <Component class="com.toedter.calendar.JDateChooser" name="txtFechVencTarj">
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtFechVencTarjFocusLost"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtNumTarj">
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtCvvTarj">
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtCvvTarjFocusLost"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

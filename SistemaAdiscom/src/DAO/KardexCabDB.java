@@ -22,7 +22,7 @@ public class KardexCabDB {
         try {
             Connection cnx = BaseDeDatos.getConnection();
             Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM FR_KARDEX_CABECERA");
+            ResultSet rs = st.executeQuery("SELECT * FROM FR_KARDEX_CABECERA order by 1");
             while (rs.next()) {
                 int codigo = rs.getInt("kar_id");
                 int valorminimo = rs.getInt("KR_VALOR_MINIMO");

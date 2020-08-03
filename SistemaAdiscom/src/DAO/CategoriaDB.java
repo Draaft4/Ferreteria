@@ -15,7 +15,7 @@ public class CategoriaDB {
         try {
             Connection cnx = BaseDeDatos.getConnection();
             Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM fr_categorias");
+            ResultSet rs = st.executeQuery("SELECT * FROM fr_categorias order by 1");
             while (rs.next()) {
                 int codigo = rs.getInt("cat_id");
                 String nombreCat = rs.getString("cat_nombre");

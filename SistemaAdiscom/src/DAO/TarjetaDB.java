@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 public class TarjetaDB {
 
@@ -17,7 +18,7 @@ public class TarjetaDB {
         try {
             Connection cnx = BaseDeDatos.getConnection();
             Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM fr_tarjetas");
+            ResultSet rs = st.executeQuery("SELECT * FROM fr_tarjetas order by 1");
             while (rs.next()) {
                 int codigo = rs.getInt("tar_id");
                 Date fechaVenc = rs.getDate("tar_fecha_vencimiento");
@@ -33,27 +34,24 @@ public class TarjetaDB {
         }
         return tarjeta;
     }
-    
-//     public void insert(TarjetaCredito tarjetaCredito) {
-//        try {
-//            Connection cnx = BaseDeDatos.getConnection();
-//            //permite hacer transacciones eliminar insertar
-//            PreparedStatement pst = cnx.prepareStatement("INSERT INTO  "
-//                    + "FR_Productos (  pro_id,pro_nombre ,pro_descripcion,pro_precio_unitario,"
-//                    + "pro_stock,pro_procedencia,fr_categorias_cat_id, fr_kardex_cabecera_kar_id) "
-//                    + "VALUES(  FR_productos_SEQ.nextval, ?, ?, ? ,?,?,?,?)");
-//            pst.setString(1, producto.getNombre());
-//            pst.setString(2, producto.getDesc());
-//            pst.setDouble(3, producto.getPrecio());
-//            pst.setInt(4, producto.getStock());
-//            pst.setString(5, producto.getProcedencia());
-//            pst.setInt(6, producto.getCat().getCodigo());
-//            pst.setInt(7, producto.getIdKardexCab());
-//            pst.executeUpdate();
-//
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, ex.getMessage());
-//        }
-//    }
 
+    public void insert(TarjetaCredito tarjetaCredito) {
+        try {
+            Connection cnx = BaseDeDatos.getConnection();
+            // permite hacer transacciones eliminar insertar
+            PreparedStatement pst = cnx.prepareStatement("INSERT INTO  "
+                    + "FR_Tarjetas (  tar_id,tar_fecha_vencimiento ,tar_numero,"
+                    + "tar_cvv) "
+                    + "VALUES(   ?, ?, ? ,?)");
+            pst.setInt(1, tarjetaCredito.getCodigo());
+            pst.setDate(2, new java.sql.Date(tarjetaCredito.getFechaVenc().getTime()));
+            pst.setString(3, tarjetaCredito.getNumero());
+            pst.setString(4, tarjetaCredito.getCvv());
+
+            pst.executeUpdate();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
 }
